@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "space-around",
-    backgroundColor: "#8DF389",
+    backgroundColor: "green",
   },
   rightBtn: {
     flex: 1,
