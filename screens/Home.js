@@ -1,6 +1,26 @@
-import { View, StyleSheet, ImageBackground, Image, Text } from "react-native";
+import {
+  View,
+  StyleSheet,
+  ImageBackground,
+  Image,
+  Text,
+  TouchableOpacity,
+} from "react-native";
+// plant photo
+import Pepper from "../assets/pepper.jpg";
+import Cabbage from "../assets/cabbage.jpg";
+import Tomato from "../assets/tomato.jpg";
+// components
+import Item from "../components/item";
 
 function Home() {
+  function leftBtnListener() {
+    console.log("left pressed");
+  }
+  function rightBtnListener() {
+    console.log("right pressed");
+  }
+
   return (
     <ImageBackground
       source={require("../assets/background.jpg")}
@@ -14,14 +34,37 @@ function Home() {
           resizeMode="cover"
         />
       </View>
-      <View style={styles.items}></View>
+      <View style={styles.items}>
+        <Text
+          style={{
+            paddingTop: 10,
+            fontSize: 20,
+            fontWeight: "bold",
+            color: "white",
+            textAlign: "center",
+          }}
+        >
+          작물을 선택하세요
+        </Text>
+        <Item image={Pepper}>고추</Item>
+        <Item image={Cabbage}>배추</Item>
+        <Item image={Tomato}>토마토</Item>
+      </View>
       <View style={styles.Footer}>
-        <View style={styles.leftBtn}>
+        <TouchableOpacity
+          style={styles.leftBtn}
+          onPress={leftBtnListener}
+          activeOpacity={0.6}
+        >
           <Text style={styles.text}>정보 광장</Text>
-        </View>
-        <View style={styles.rightBtn}>
+        </TouchableOpacity>
+        <TouchableOpacity
+          style={styles.rightBtn}
+          onPress={rightBtnListener}
+          activeOpacity={0.6}
+        >
           <Text style={styles.text}>종료하기</Text>
-        </View>
+        </TouchableOpacity>
       </View>
     </ImageBackground>
   );
@@ -42,8 +85,7 @@ const styles = StyleSheet.create({
   },
   items: {
     flex: 7,
-    backgroundColor: "black",
-    opacity: 0.5,
+    flexDirection: "column",
   },
   Footer: {
     flex: 1,
