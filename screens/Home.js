@@ -13,9 +13,12 @@ import Tomato from "../assets/tomato.jpg";
 // components
 import Item from "../components/item";
 
-function Home() {
+function Home({ navigation }) {
+  function pressHandler(e) {
+    navigation.navigate("SelectImage", { plantId: e });
+  }
   function leftBtnListener() {
-    console.log("left pressed");
+    navigation.navigate("Board");
   }
   function rightBtnListener() {
     console.log("right pressed");
@@ -27,28 +30,28 @@ function Home() {
       resizeMode="cover"
       style={styles.Container}
     >
-      <View style={styles.Header}>
-        <Image
-          style={styles.Images}
-          source={require("../assets/logo.png")}
-          resizeMode="cover"
-        />
-      </View>
       <View style={styles.items}>
-        <Text
-          style={{
-            paddingTop: 10,
-            fontSize: 20,
-            fontWeight: "bold",
-            color: "white",
-            textAlign: "center",
-          }}
+        <Item
+          image={Pepper}
+          plant="pepper"
+          onPress={pressHandler.bind(this, "pepper")}
         >
-          작물을 선택하세요
-        </Text>
-        <Item image={Pepper}>고추</Item>
-        <Item image={Cabbage}>배추</Item>
-        <Item image={Tomato}>토마토</Item>
+          고추
+        </Item>
+        <Item
+          image={Cabbage}
+          plant="cabbage"
+          onPress={pressHandler.bind(this, "cabbage")}
+        >
+          배추
+        </Item>
+        <Item
+          image={Tomato}
+          plant="tomato"
+          onPress={pressHandler.bind(this, "tomato")}
+        >
+          토마토
+        </Item>
       </View>
       <View style={styles.Footer}>
         <TouchableOpacity
@@ -74,17 +77,12 @@ const styles = StyleSheet.create({
   Container: {
     flex: 1,
   },
-  Header: {
-    flex: 2,
-    backgroundColor: "white",
-    alignItems: "center",
-  },
   Images: {
     width: "50%",
     height: "100%",
   },
   items: {
-    flex: 7,
+    flex: 9,
     flexDirection: "column",
   },
   Footer: {
@@ -102,11 +100,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "space-around",
     backgroundColor: "red",
-  },
-  text: {
-    color: "white",
-    fontSize: 20,
-    fontWeight: "bold",
   },
 });
 

@@ -16,6 +16,7 @@ function Item(props) {
           styles.button,
           pressed ? styles.buttonPressed : null,
         ]}
+        onPress={props.onPress}
       >
         <View style={styles.innerContainer}>
           <Image source={props.image} style={styles.images} />
