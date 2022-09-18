@@ -1,85 +1,32 @@
-import {
-  View,
-  Text,
-  StyleSheet,
-  ImageBackground,
-  TouchableOpacity,
-  Image,
-  Button,
-  Platform,
-} from "react-native";
+import { useContext, useState } from "react";
+import { View, StyleSheet, Image, Platform, Alert } from "react-native";
+import AuthContent from "../components/Auth/AuthContent";
+import LoadingOverlay from "../components/LoadingOverlay";
+import { AuthContext } from "../store/auth-context";
+import { login } from "../util/Auth";
+function Login() {
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
 
-function Login({ navigation }) {
-  function pressHandler() {
-    navigation.navigate("Home");
+  const authCtx = useContext(AuthContext);
+
+  async function LoginHandler({ email, password }) {
+    setIsAuthenticating(true);
+    try {
+      const token = await login(email, password);
+      authCtx.authenticate(token);
+    } catch (error) {
+      Alert.alert("로그인에 실패하였습니다!", "등록되지 않은 정보입니다.");
+    }
+    setIsAuthenticating(false);
+  }
+
+  if (isAuthenticating) {
+    return <LoadingOverlay message="로그인 중입니다..." />;
   }
   return (
     <View style={styles.container}>
       <Image source={require("../assets/logo.png")} style={styles.logo} />
-      <View style={styles.loginContainer}>
-        <Button onPress={pressHandler} title="개발중입니다..." />
-      </View>
-      <TouchableOpacity
-        onPress={() => {
-          navigation.navigate("Register");
-        }}
-        style={{
-          backgroundColor: "green",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: 25,
-          width: 150,
-          height: 40,
-          borderRadius: 10,
-          ...Platform.select({
-            ios: {
-              shadowOpacity: 0.5,
-            },
-            android: {
-              elevation: 5,
-            },
-          }),
-        }}
-        activeOpacity={0.6}
-      >
-        <Text
-          style={{
-            color: "white",
-            fontSize: 18,
-          }}
-        >
-          회원가입
-        </Text>
-      </TouchableOpacity>
-      <TouchableOpacity
-        style={{
-          backgroundColor: "red",
-          justifyContent: "center",
-          alignItems: "center",
-          marginTop: 25,
-          width: 150,
-          height: 40,
-          borderRadius: 10,
-          ...Platform.select({
-            ios: {
-              shadowOpacity: 0.5,
-            },
-            android: {
-              elevation: 5,
-            },
-          }),
-        }}
-        activeOpacity={0.6}
-      >
-        <Text
-          style={{
-            color: "white",
-            fontSize: 18,
-          }}
-        >
-          종료하기
-        </Text>
-      </TouchableOpacity>
+      <AuthContent isLogin onAuthenticate={LoginHandler} />
     </View>
   );
 }
@@ -92,25 +39,9 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    marginVertical: 40,
+    marginVertical: 50,
     width: 150,
     height: 120,
-    ...Platform.select({
-      ios: {
-        shadowOpacity: 0.5,
-      },
-      android: {
-        elevation: 3,
-      },
-    }),
-  },
-  loginContainer: {
-    justifyContent: "center",
-    alignItems: "center",
-    width: 250,
-    height: 250,
-    backgroundColor: "white",
-    borderRadius: 10,
     ...Platform.select({
       ios: {
         shadowOpacity: 0.5,

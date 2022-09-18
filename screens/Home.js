@@ -66,7 +66,7 @@ function Home({ navigation }) {
           onPress={rightBtnListener}
           activeOpacity={0.6}
         >
-          <Text style={styles.text}>종료하기</Text>
+          <Text style={styles.text}>로그아웃</Text>
         </TouchableOpacity>
       </View>
     </ImageBackground>
