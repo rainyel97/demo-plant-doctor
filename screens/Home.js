@@ -17,7 +17,7 @@ function Home({ navigation }) {
     navigation.navigate("History");
   }
   function GoogleMapPressHandler() {
-    navigation.navigate("SelectPlant");
+    navigation.navigate("SearchDrug");
   }
 
   return (

@@ -8,6 +8,7 @@ import Login from "./screens/Login";
 import Register from "./screens/Register";
 import Home from "./screens/Home";
 import SelectPlant from "./screens/SelectPlant";
+import SearchDrug from "./screens/SearchDrug";
 import History from "./screens/History";
 import SelectImage from "./screens/SelectImage";
 import Result from "./screens/Result";
@@ -45,6 +46,13 @@ function AuthenticatedStack() {
         component={Home}
         options={{
           title: "원하는 기능을 선택하세요",
+        }}
+      />
+      <Stack.Screen
+        name="SearchDrug"
+        component={SearchDrug}
+        options={{
+          title: "나에게 가까운 농약사 찾기",
         }}
       />
       <Stack.Screen
