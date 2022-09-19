@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { View, StyleSheet, Image, Platform, Alert } from "react-native";
+import { View, StyleSheet, Image, Alert } from "react-native";
 import AuthContent from "../components/Auth/AuthContent";
 import LoadingOverlay from "../components/LoadingOverlay";
 import { AuthContext } from "../store/auth-context";
@@ -16,8 +16,8 @@ function Login() {
       authCtx.authenticate(token);
     } catch (error) {
       Alert.alert("로그인에 실패하였습니다!", "등록되지 않은 정보입니다.");
+      setIsAuthenticating(false);
     }
-    setIsAuthenticating(false);
   }
 
   if (isAuthenticating) {
@@ -42,14 +42,6 @@ const styles = StyleSheet.create({
     marginVertical: 50,
     width: 150,
     height: 120,
-    ...Platform.select({
-      ios: {
-        shadowOpacity: 0.5,
-      },
-      android: {
-        elevation: 3,
-      },
-    }),
   },
 });
 

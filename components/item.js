@@ -38,7 +38,7 @@ const styles = StyleSheet.create({
     height: 150,
     borderRadius: 10,
     elevation: 4,
-    opacity: 0.85,
+    opacity: 0.8,
     backgroundColor: "white",
     shadowColor: "black",
     shadowOpacity: 0.25,
@@ -60,7 +60,7 @@ const styles = StyleSheet.create({
     justifyContent: "space-between",
   },
   textContainer: {
-    flex: 2,
+    flex: 4,
     justifyContent: "center",
     alignItems: "center",
   },
@@ -69,8 +69,7 @@ const styles = StyleSheet.create({
     fontSize: 28,
   },
   images: {
-    flex: 1,
-    width: "40%",
+    flex: 3,
     height: "100%",
     borderRadius: 10,
   },

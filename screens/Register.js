@@ -15,9 +15,12 @@ function Register() {
       const token = await createUser(email, password);
       authCtx.authenticate(token);
     } catch (error) {
-      Alert.alert("가입에 실패하였습니다!", "이메일이 유효한지 확인해주세요.");
+      Alert.alert(
+        "가입에 실패하였습니다!",
+        "이미 가입된 이메일이거나 이메일이 유효하지 않습니다."
+      );
+      setIsAuthenticating(false);
     }
-    setIsAuthenticating(false);
   }
 
   if (isAuthenticating) {

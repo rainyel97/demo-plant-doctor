@@ -1,105 +1,83 @@
-import {
-  View,
-  StyleSheet,
-  ImageBackground,
-  Image,
-  Text,
-  TouchableOpacity,
-} from "react-native";
-// plant photo
-import Pepper from "../assets/pepper.jpg";
-import Cabbage from "../assets/cabbage.jpg";
-import Tomato from "../assets/tomato.jpg";
-// components
-import Item from "../components/item";
-
+import { useContext } from "react";
+import { AuthContext } from "../store/auth-context";
+import { View, StyleSheet, Image, ImageBackground } from "react-native";
+import HomeBtn from "../components/HomeBtn";
+//
+import iconSearch from "../assets/search.png";
+import iconDrug from "../assets/drug.png";
+import iconHistory from "../assets/history.png";
+import iconLogout from "../assets/logout.png";
+//
 function Home({ navigation }) {
-  function pressHandler(e) {
-    navigation.navigate("SelectImage", { plantId: e });
+  const authCtx = useContext(AuthContext);
+  function SelectPlantPressHandler() {
+    navigation.navigate("SelectPlant");
   }
-  function leftBtnListener() {
-    navigation.navigate("Board");
+  function HistoryPressHandler() {
+    navigation.navigate("History");
   }
-  function rightBtnListener() {
-    console.log("right pressed");
+  function GoogleMapPressHandler() {
+    navigation.navigate("SelectPlant");
   }
 
   return (
     <ImageBackground
-      source={require("../assets/background.jpg")}
+      source={require("../assets/Homebg.jpg")}
       resizeMode="cover"
-      style={styles.Container}
+      style={styles.back}
     >
-      <View style={styles.items}>
-        <Item
-          image={Pepper}
-          plant="pepper"
-          onPress={pressHandler.bind(this, "pepper")}
-        >
-          고추
-        </Item>
-        <Item
-          image={Cabbage}
-          plant="cabbage"
-          onPress={pressHandler.bind(this, "cabbage")}
-        >
-          배추
-        </Item>
-        <Item
-          image={Tomato}
-          plant="tomato"
-          onPress={pressHandler.bind(this, "tomato")}
-        >
-          토마토
-        </Item>
-      </View>
-      <View style={styles.Footer}>
-        <TouchableOpacity
-          style={styles.leftBtn}
-          onPress={leftBtnListener}
-          activeOpacity={0.6}
-        >
-          <Text style={styles.text}>정보 광장</Text>
-        </TouchableOpacity>
-        <TouchableOpacity
-          style={styles.rightBtn}
-          onPress={rightBtnListener}
-          activeOpacity={0.6}
-        >
-          <Text style={styles.text}>로그아웃</Text>
-        </TouchableOpacity>
+      <View style={styles.container}>
+        <Image source={require("../assets/homelogo.png")} style={styles.logo} />
+        <View style={styles.btnContainer}>
+          <HomeBtn
+            icon={iconSearch}
+            onPress={SelectPlantPressHandler}
+            color="#8DF389"
+          >
+            병충해 검사하기
+          </HomeBtn>
+          <HomeBtn
+            icon={iconDrug}
+            onPress={GoogleMapPressHandler}
+            color="#FFEB3B"
+          >
+            농약사 찾아보기
+          </HomeBtn>
+        </View>
+        <View style={styles.btnContainer}>
+          <HomeBtn
+            icon={iconHistory}
+            onPress={HistoryPressHandler}
+            color="#5DC2EB"
+          >
+            검사 내역
+          </HomeBtn>
+          <HomeBtn icon={iconLogout} onPress={authCtx.logout} color="#E53935">
+            로그아웃
+          </HomeBtn>
+        </View>
       </View>
     </ImageBackground>
   );
 }
 
 const styles = StyleSheet.create({
-  Container: {
+  back: {
     flex: 1,
   },
-  Images: {
-    width: "50%",
-    height: "100%",
-  },
-  items: {
-    flex: 9,
-    flexDirection: "column",
-  },
-  Footer: {
+  container: {
     flex: 1,
+    justifyContent: "flex-start",
+    alignItems: "center",
+  },
+  logo: {
+    marginVertical: 60,
+    width: 160,
+    height: 130,
+  },
+  btnContainer: {
+    marginVertical: 17,
     flexDirection: "row",
-  },
-  leftBtn: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-around",
-    backgroundColor: "green",
-  },
-  rightBtn: {
-    flex: 1,
-    alignItems: "center",
-    justifyContent: "space-around",
-    backgroundColor: "red",
   },
 });
 

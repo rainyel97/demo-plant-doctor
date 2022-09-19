@@ -7,7 +7,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Login from "./screens/Login";
 import Register from "./screens/Register";
 import Home from "./screens/Home";
-import Board from "./screens/Board";
+import SelectPlant from "./screens/SelectPlant";
+import History from "./screens/History";
 import SelectImage from "./screens/SelectImage";
 import Result from "./screens/Result";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
@@ -43,14 +44,21 @@ function AuthenticatedStack() {
         name="Home"
         component={Home}
         options={{
-          title: "작물을 선택하세요!",
+          title: "원하는 기능을 선택하세요",
+        }}
+      />
+      <Stack.Screen
+        name="SelectPlant"
+        component={SelectPlant}
+        options={{
+          title: "작물을 선택하세요",
         }}
       />
       <Stack.Screen
         name="SelectImage"
         component={SelectImage}
         options={{
-          title: "이미지를 추가하세요!",
+          title: "이미지를 추가하세요",
         }}
       />
       <Stack.Screen
@@ -61,10 +69,10 @@ function AuthenticatedStack() {
         }}
       />
       <Stack.Screen
-        name="Board"
-        component={Board}
+        name="History"
+        component={History}
         options={{
-          title: "정보 광장",
+          title: "검사 내역",
         }}
       />
     </Stack.Navigator>

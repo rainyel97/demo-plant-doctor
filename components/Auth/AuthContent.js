@@ -16,11 +16,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
   });
 
   function switchAuthModeHandler() {
-    if (isLogin) {
-      navigation.replace("Register");
-    } else {
-      navigation.replace("Login");
-    }
+    navigation.navigate("Register");
   }
 
   function submitHandler(credentials) {
@@ -61,11 +57,11 @@ function AuthContent({ isLogin, onAuthenticate }) {
         onSubmit={submitHandler}
         credentialsInvalid={credentialsInvalid}
       />
-      <View style={styles.buttons}>
-        <FlatButton onPress={switchAuthModeHandler}>
-          {isLogin ? "회원가입" : "로그인하러가기"}
-        </FlatButton>
-      </View>
+      {isLogin ? (
+        <View style={styles.buttons}>
+          <FlatButton onPress={switchAuthModeHandler}>회원가입</FlatButton>
+        </View>
+      ) : null}
     </View>
   );
 }

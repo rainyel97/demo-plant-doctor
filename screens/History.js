@@ -1,13 +1,13 @@
 import { View, Text, StyleSheet } from "react-native";
 
-function Board() {
+function History() {
   return (
     <View>
-      <Text>Board</Text>
+      <Text>History</Text>
     </View>
   );
 }
 
 const styles = StyleSheet.create({});
 
-export default Board;
+export default History;
