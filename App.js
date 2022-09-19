@@ -13,6 +13,7 @@ import History from "./screens/History";
 import SelectImage from "./screens/SelectImage";
 import Result from "./screens/Result";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
+import { useFonts } from "expo-font";
 //
 const Stack = createNativeStackNavigator();
 //회원가입 화면 스택
@@ -111,6 +112,5 @@ export default function App() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    //paddingTop: Platform.OS === "android" ? 25 : 0,
   },
 });

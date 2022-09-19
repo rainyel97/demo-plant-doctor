@@ -1,5 +1,4 @@
 import { Pressable, StyleSheet, Text, View } from "react-native";
-
 function Button({ children, onPress }) {
   return (
     <Pressable
