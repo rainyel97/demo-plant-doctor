@@ -10,13 +10,13 @@ function Login() {
   const authCtx = useContext(AuthContext);
 
   async function LoginHandler({ email, password }) {
-    setIsAuthenticating(true);
+    //setIsAuthenticating(true);
     try {
       const token = await login(email, password);
       authCtx.authenticate(token);
     } catch (error) {
       Alert.alert("로그인에 실패하였습니다!", "등록되지 않은 정보입니다.");
-      setIsAuthenticating(false);
+      //setIsAuthenticating(false);
     }
   }
 

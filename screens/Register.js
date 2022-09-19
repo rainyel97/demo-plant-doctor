@@ -10,7 +10,7 @@ function Register() {
   const authCtx = useContext(AuthContext);
 
   async function signupHandler({ email, password }) {
-    setIsAuthenticating(true);
+    //setIsAuthenticating(true);
     try {
       const token = await createUser(email, password);
       authCtx.authenticate(token);
@@ -19,7 +19,7 @@ function Register() {
         "가입에 실패하였습니다!",
         "이미 가입된 이메일이거나 이메일이 유효하지 않습니다."
       );
-      setIsAuthenticating(false);
+      //setIsAuthenticating(false);
     }
   }
 
