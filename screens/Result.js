@@ -1,11 +1,7 @@
 import { View, Text, StyleSheet } from "react-native";
 
 function Result() {
-  return (
-    <View>
-      <Text>Result</Text>
-    </View>
-  );
+  return <View></View>;
 }
 
 const styles = StyleSheet.create({});

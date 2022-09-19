@@ -73,7 +73,7 @@ function AuthenticatedStack() {
         name="Result"
         component={Result}
         options={{
-          title: "분석결과입니다...",
+          title: "검사결과입니다...",
         }}
       />
       <Stack.Screen
