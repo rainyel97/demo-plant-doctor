@@ -8,14 +8,35 @@ function SelectImage({ route, navigation }) {
   function getResult() {
     navigation.navigate("Result");
   }
+  const [cameraPermissionInformation, requestPermission] =
+    ImagePicker.useCameraPermissions();
 
+  async function verifyPermissions() {
+    if (
+      cameraPermissionInformation.status ===
+      ImagePicker.PermissionStatus.UNDETERMINED
+    ) {
+      const permissionResponse = await requestPermission();
+
+      return permissionResponse.granted;
+    }
+
+    if (
+      cameraPermissionInformation.status === ImagePicker.PermissionStatus.DENIED
+    ) {
+      Alert.alert(
+        "Insufficient Permissions!",
+        "You need to grant camera permissions to use this app."
+      );
+      return false;
+    }
+
+    return true;
+  }
   async function takePhoto() {
-    //const hasPermisson = await verifyPermissions();
-    //if (!hasPermisson) return;
-    const status = await ImagePicker.requestCameraPermissionsAsync();
-    console.log(status.granted);
-    if (status.granted === "false") {
-      Alert.alert("권한이 승인되지 않았습니다", "카메라에 접근할 수 없습니다!");
+    const hasPermission = await verifyPermissions();
+
+    if (!hasPermission) {
       return;
     }
     let result = await ImagePicker.launchCameraAsync({
@@ -32,10 +53,9 @@ function SelectImage({ route, navigation }) {
   }
 
   async function pickImage() {
-    const status = await ImagePicker.requestMediaLibraryPermissionsAsync();
-    console.log(status.granted);
-    if (status.granted === "false") {
-      Alert.alert("권한이 승인되지 않았습니다", "갤러리에 접근할 수 없습니다!");
+    const hasPermission = await verifyPermissions();
+
+    if (!hasPermission) {
       return;
     }
     let result = await ImagePicker.launchImageLibraryAsync({
