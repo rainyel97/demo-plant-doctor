@@ -12,8 +12,8 @@ import SearchDrug from "./screens/SearchDrug";
 import History from "./screens/History";
 import SelectImage from "./screens/SelectImage";
 import Result from "./screens/Result";
+import PesticideSearch from "./screens/PesticideSearch";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
-import { useFonts } from "expo-font";
 //
 const Stack = createNativeStackNavigator();
 //회원가입 화면 스택
@@ -75,6 +75,13 @@ function AuthenticatedStack() {
         component={Result}
         options={{
           title: "검사결과입니다...",
+        }}
+      />
+      <Stack.Screen
+        name="PesticideSearch"
+        component={PesticideSearch}
+        options={{
+          title: "농약정보",
         }}
       />
       <Stack.Screen

@@ -6,7 +6,7 @@ function SelectImage({ route, navigation }) {
   const [image, setImage] = useState(null);
   //const plantId = route.params.plantId;
   function getResult() {
-    navigation.navigate("Result");
+    navigation.navigate("Result", { image: image });
   }
   const [cameraPermissionInformation, requestPermission] =
     ImagePicker.useCameraPermissions();

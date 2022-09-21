@@ -14,6 +14,7 @@ function Login() {
     try {
       const token = await login(email, password);
       authCtx.authenticate(token);
+      authCtx.memoryUser(email);
     } catch (error) {
       Alert.alert("로그인에 실패하였습니다!", "등록되지 않은 정보입니다.");
       //setIsAuthenticating(false);
