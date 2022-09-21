@@ -12,6 +12,7 @@ import SearchDrug from "./screens/SearchDrug";
 import History from "./screens/History";
 import SelectImage from "./screens/SelectImage";
 import Result from "./screens/Result";
+import PestSearch from "./screens/PestSearch";
 import PesticideSearch from "./screens/PesticideSearch";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 //
@@ -75,6 +76,13 @@ function AuthenticatedStack() {
         component={Result}
         options={{
           title: "검사결과입니다...",
+        }}
+      />
+      <Stack.Screen
+        name="PestSearch"
+        component={PestSearch}
+        options={{
+          title: "질병정보",
         }}
       />
       <Stack.Screen

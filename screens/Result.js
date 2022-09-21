@@ -14,9 +14,11 @@ function Result({ route, navigation }) {
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
   const img = route.params.image;
   const acc = undefined;
-  const pest = "파노균병";
-
-  function showContentHandler() {
+  const pest = "파녹병";
+  function showPestHandler() {
+    navigation.navigate("PestSearch", { pest: pest });
+  }
+  function showPesticideHandler() {
     navigation.navigate("PesticideSearch", { pest: pest });
   }
 
@@ -37,20 +39,24 @@ function Result({ route, navigation }) {
             (으)로 판별되었습니다!
           </Text>
         </View>
-        <View>
-          <Text>질병정보</Text>
-        </View>
         <Pressable
           style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-          onPress={showContentHandler}
+          onPress={showPestHandler}
+        >
+          <View>
+            <Text style={styles.buttonText}>질병 정보</Text>
+          </View>
+        </Pressable>
+        <Pressable
+          style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+          onPress={showPesticideHandler}
         >
           <View>
             <Text style={styles.buttonText}>농약 정보</Text>
           </View>
         </Pressable>
         <Text style={{ fontSize: 18 }}>
-          농약 정보 버튼을 클릭하시면 '농약안전정보시스템' 에서 치료에 필요한
-          농약정보를 링크를 통해 보실 수 있습니다!
+          버튼을 클릭하시면 상세정보 확인이 가능합니다.
         </Text>
       </View>
     </ScrollView>

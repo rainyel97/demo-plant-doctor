@@ -7,29 +7,30 @@ function PesticideSearch({ route }) {
   let url;
   if (pest === "고추탄저병")
     url =
-      "https://psis.rda.go.kr/psis/agc/res/agchmRegistStusLst.ps?menuId=PS00263&sAgCropsYn1=Y&sAgCropsNm1=고추&sAgDbyhsYn1=Y&sAgApplcDbyhsNm1=탄저병";
+      "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=탄저병&skCorpName=고추";
   else if (pest === "고추흰가루병")
     url =
-      "https://psis.rda.go.kr/psis/agc/res/agchmRegistStusLst.ps?menuId=PS00263&sAgCropsYn1=Y&sAgCropsNm1=고추&sAgDbyhsYn1=Y&sAgApplcDbyhsNm1=흰가루병";
+      "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=흰가루병&skCorpName=고추";
   else if (pest === "배추검음썩음병")
     url =
-      "https://psis.rda.go.kr/psis/agc/res/agchmRegistStusLst.ps?menuId=PS00263&sAgDbyhsYn1=Y&sAgApplcDbyhsNm1=검은썩음병";
+      "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=검은썩음병&skCorpName=배추";
   else if (pest === "배추노균병")
     url =
-      "https://psis.rda.go.kr/psis/agc/res/agchmRegistStusLst.ps?menuId=PS00263&sAgCropsYn1=Y&sAgCropsNm1=배추&sAgDbyhsYn1=Y&sAgApplcDbyhsNm1=노균병";
+      "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=노균병&skCorpName=고추";
   else if (pest === "파검은무늬병")
     url =
-      "https://psis.rda.go.kr/psis/agc/res/agchmRegistStusLst.ps?menuId=PS00263&sAgCropsYn1=Y&sAgCropsNm1=파&sAgDbyhsYn1=Y&sAgApplcDbyhsNm1=검은무늬병";
+      "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=검은무늬병&skCorpName=파";
   else if (pest === "파노균병")
     url =
-      "https://psis.rda.go.kr/psis/agc/res/agchmRegistStusLst.ps?menuId=PS00263&sAgCropsYn1=Y&sAgCropsNm1=파&sAgDbyhsYn1=Y&sAgApplcDbyhsNm1=노균병";
+      "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=노균병&skCorpName=파";
   else if (pest === "파녹병")
     url =
-      "https://psis.rda.go.kr/psis/agc/res/agchmRegistStusLst.ps?menuId=PS00263&sAgCropsYn1=Y&sAgCropsNm1=파&sAgDbyhsYn1=Y&sAgApplcDbyhsNm1=녹병";
+      "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=녹병&skCorpName=파";
 
   console.log(pest);
   console.log(url);
   return <WebView source={{ uri: url }} />;
 }
-
+//https://psis.rda.go.kr/psis/agc/res/agchmRegistStusLst.ps?menuId=PS00263&sAgCropsYn1=Y&sAgCropsNm1=고추&sAgDbyhsYn1=Y&sAgApplcDbyhsNm1=흰가루병//농약정보대체주소
+//ncpms.rda.go.kr/mobile/MobileSicknsDtlR.ms?hiKncrCode=VC&sKncrCode=VC011205&dtlKey=D00000195&pageIndex=1//질병상세페이지//고추탄저병
 export default PesticideSearch;
