@@ -8,7 +8,6 @@ import {
   ScrollView,
 } from "react-native";
 import { AuthContext } from "../store/auth-context";
-import { PestData } from "../data/PestData";
 function Result({ route, navigation }) {
   const authCtx = useContext(AuthContext);
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
@@ -36,7 +35,7 @@ function Result({ route, navigation }) {
           </Text>
           <Text style={styles.resultText}>
             <Text style={{ color: "red", fontSize: 24 }}>{pest}</Text>
-            으로 판별되었습니다!
+            (으)로 판별되었습니다!
           </Text>
         </View>
         <View style={{ flexDirection: "row" }}>
@@ -92,7 +91,6 @@ const styles = StyleSheet.create({
     width: 150,
     height: 50,
     marginBottom: 20,
-    marginHorizontal: 6,
     borderRadius: 6,
     paddingVertical: 6,
     paddingHorizontal: 12,
