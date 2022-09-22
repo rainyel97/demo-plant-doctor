@@ -54,7 +54,7 @@ function AuthenticatedStack() {
         name="SearchDrug"
         component={SearchDrug}
         options={{
-          title: "나에게 가까운 농약사 찾기",
+          title: "가까운 농약사 찾기",
         }}
       />
       <Stack.Screen
@@ -75,7 +75,7 @@ function AuthenticatedStack() {
         name="Result"
         component={Result}
         options={{
-          title: "검사결과입니다...",
+          title: "검사결과",
         }}
       />
       <Stack.Screen

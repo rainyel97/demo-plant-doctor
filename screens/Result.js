@@ -8,13 +8,13 @@ import {
   ScrollView,
 } from "react-native";
 import { AuthContext } from "../store/auth-context";
-import { PestData } from "../data/pestdata";
+import { PestData } from "../data/PestData";
 function Result({ route, navigation }) {
   const authCtx = useContext(AuthContext);
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
   const img = route.params.image;
   const acc = undefined;
-  const pest = "파녹병";
+  const pest = "고추탄저병";
   function showPestHandler() {
     navigation.navigate("PestSearch", { pest: pest });
   }
@@ -36,25 +36,27 @@ function Result({ route, navigation }) {
           </Text>
           <Text style={styles.resultText}>
             <Text style={{ color: "red", fontSize: 24 }}>{pest}</Text>
-            (으)로 판별되었습니다!
+            으로 판별되었습니다!
           </Text>
         </View>
-        <Pressable
-          style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-          onPress={showPestHandler}
-        >
-          <View>
-            <Text style={styles.buttonText}>질병 정보</Text>
-          </View>
-        </Pressable>
-        <Pressable
-          style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-          onPress={showPesticideHandler}
-        >
-          <View>
-            <Text style={styles.buttonText}>농약 정보</Text>
-          </View>
-        </Pressable>
+        <View style={{ flexDirection: "row" }}>
+          <Pressable
+            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+            onPress={showPestHandler}
+          >
+            <View>
+              <Text style={styles.buttonText}>질병 정보</Text>
+            </View>
+          </Pressable>
+          <Pressable
+            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+            onPress={showPesticideHandler}
+          >
+            <View>
+              <Text style={styles.buttonText}>농약 정보</Text>
+            </View>
+          </Pressable>
+        </View>
         <Text style={{ fontSize: 18 }}>
           버튼을 클릭하시면 상세정보 확인이 가능합니다.
         </Text>
@@ -90,6 +92,7 @@ const styles = StyleSheet.create({
     width: 150,
     height: 50,
     marginBottom: 20,
+    marginHorizontal: 6,
     borderRadius: 6,
     paddingVertical: 6,
     paddingHorizontal: 12,
