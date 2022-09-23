@@ -26,7 +26,10 @@ function Login() {
   }
   return (
     <View style={styles.container}>
-      <Image source={require("../assets/logo.png")} style={styles.logo} />
+      <Image
+        source={require("../assets/newLogo-removebg.png")}
+        style={styles.newLogo}
+      />
       <AuthContent isLogin onAuthenticate={LoginHandler} />
     </View>
   );
@@ -43,6 +46,10 @@ const styles = StyleSheet.create({
     marginVertical: 50,
     width: 150,
     height: 120,
+  },
+  newLogo: {
+    width: 260,
+    height: 260,
   },
 });
 
