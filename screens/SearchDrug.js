@@ -1,8 +1,15 @@
 import { useState, useEffect } from "react";
-import { View, Text, StyleSheet, Alert, FlatList } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Alert,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
 import axios from "axios";
 import * as Location from "expo-location";
-
+import { Linking } from "react-native";
 function SearchDrug() {
   let i = 0;
   const [x, setX] = useState();
@@ -11,8 +18,9 @@ function SearchDrug() {
 
   useEffect(() => {
     getLocation();
+    console.log(x, y);
     getListKakao();
-  }, []);
+  }, [x, y]);
   async function getLocation() {
     let { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
@@ -30,7 +38,7 @@ function SearchDrug() {
   async function getListKakao() {
     try {
       const res = await axios.get(
-        `https://dapi.kakao.com/v2/local/search/keyword.json?query=대학교"&y=${y}&x=${x}&radius=20000`,
+        `https://dapi.kakao.com/v2/local/search/keyword.json?page=1&size=15&sort=distance&query="농약사"&radius=20000&y=${y}&x=${x}`,
         {
           headers: {
             Authorization: "KakaoAK 5bbb60811fafca11368092edfdbc6a89",
@@ -50,10 +58,14 @@ function SearchDrug() {
         data={data}
         renderItem={({ item }) => (
           <View style={styles.item}>
-            <Text>{item.place_name}</Text>
-            <Text>{item.phone ? item.phone : "전화번호가 없습니다..."}</Text>
-            <Text>{item.place_url}</Text>
-            <Text>{item.distance}</Text>
+            <View>
+              <Text>{item.place_name}</Text>
+              <Text>{item.phone ? item.phone : "전화번호가 없습니다..."}</Text>
+              <Text>{parseInt(item.distance) / 1000}Km</Text>
+            </View>
+            <TouchableOpacity onPress={() => Linking.openURL(item.place_url)}>
+              <Text style={{ fontSize: 20 }}>상세정보보기</Text>
+            </TouchableOpacity>
           </View>
         )}
         keyExtractor={(item) => item.id}
@@ -67,9 +79,14 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   item: {
+    backgroundColor: "white",
     padding: 20,
     fontSize: 15,
-    marginTop: 5,
+    margin: 5,
+    borderRadius: 8,
+    flexDirection: "row",
+    justifyContent: "space-between",
+    alignItems: "center",
   },
 });
 
