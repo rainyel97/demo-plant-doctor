@@ -11,7 +11,6 @@ import axios from "axios";
 import * as Location from "expo-location";
 import { Linking } from "react-native";
 function SearchDrug() {
-  let i = 0;
   const [x, setX] = useState();
   const [y, setY] = useState();
   const [data, setData] = useState([]);
@@ -64,7 +63,7 @@ function SearchDrug() {
             <View>
               <Text>{item.place_name}</Text>
               <Text>{item.phone ? item.phone : "전화번호가 없습니다..."}</Text>
-              <Text>{parseInt(item.distance) / 1000}Km</Text>
+              <Text>{item.address_name}</Text>
             </View>
             <TouchableOpacity
               onPress={() => Linking.openURL(item.place_url)}
