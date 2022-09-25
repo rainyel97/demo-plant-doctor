@@ -54,7 +54,7 @@ function SearchDrug() {
 
   return (
     <View style={styles.container}>
-      <Text style={{ fontSize: 20, padding: 5 }}>
+      <Text style={{ fontSize: 20, padding: 10 }}>
         당신의 위치에서 20Km이내에서 찾은 15개의 결과입니다...
       </Text>
       <FlatList
@@ -83,7 +83,6 @@ function SearchDrug() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
   },
   item: {
     backgroundColor: "white",
