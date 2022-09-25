@@ -54,6 +54,9 @@ function SearchDrug() {
 
   return (
     <View style={styles.container}>
+      <Text style={{ fontSize: 20, padding: 5 }}>
+        당신의 위치에서 20Km이내에서 찾은 15개의 결과입니다...
+      </Text>
       <FlatList
         data={data}
         renderItem={({ item }) => (
@@ -63,8 +66,11 @@ function SearchDrug() {
               <Text>{item.phone ? item.phone : "전화번호가 없습니다..."}</Text>
               <Text>{parseInt(item.distance) / 1000}Km</Text>
             </View>
-            <TouchableOpacity onPress={() => Linking.openURL(item.place_url)}>
-              <Text style={{ fontSize: 20 }}>상세정보보기</Text>
+            <TouchableOpacity
+              onPress={() => Linking.openURL(item.place_url)}
+              style={{ backgroundColor: "lightgreen", borderRadius: 8 }}
+            >
+              <Text style={{ fontSize: 20, padding: 5 }}>상세정보보기</Text>
             </TouchableOpacity>
           </View>
         )}
@@ -77,6 +83,7 @@ function SearchDrug() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    alignItems: "center",
   },
   item: {
     backgroundColor: "white",
