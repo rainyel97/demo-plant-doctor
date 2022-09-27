@@ -22,6 +22,7 @@ function Input({
         onChangeText={onUpdateValue}
         value={value}
         placeholder={isInvalid ? placeholder : ""}
+        maxLength={20}
       />
     </View>
   );

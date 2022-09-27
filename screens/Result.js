@@ -20,6 +20,9 @@ function Result({ route, navigation }) {
   function showPesticideHandler() {
     navigation.navigate("PesticideSearch", { pest: pest });
   }
+  function showDrugHandler() {
+    navigation.navigate("SearchDrug");
+  }
 
   return (
     <ScrollView>
@@ -60,6 +63,16 @@ function Result({ route, navigation }) {
           버튼을 클릭하시면 상세정보 확인이 가능합니다.
         </Text>
       </View>
+      <View style={{ alignItems: "center", marginTop: 20 }}>
+        <Pressable
+          style={({ pressed }) => [styles.DrugBtn, pressed && styles.pressed]}
+          onPress={showDrugHandler}
+        >
+          <View>
+            <Text style={styles.buttonText}>가까운 농약사 찾기</Text>
+          </View>
+        </Pressable>
+      </View>
     </ScrollView>
   );
 }
@@ -89,6 +102,22 @@ const styles = StyleSheet.create({
   },
   button: {
     width: 150,
+    height: 50,
+    marginBottom: 20,
+    marginHorizontal: 6,
+    borderRadius: 6,
+    paddingVertical: 6,
+    paddingHorizontal: 12,
+    backgroundColor: "green",
+    elevation: 2,
+    shadowColor: "black",
+    shadowOffset: { width: 1, height: 1 },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    justifyContent: "center",
+  },
+  DrugBtn: {
+    width: 200,
     height: 50,
     marginBottom: 20,
     marginHorizontal: 6,
