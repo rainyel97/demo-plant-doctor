@@ -1,5 +1,5 @@
 import { useContext, useState } from "react";
-import { View, StyleSheet, Image, Alert } from "react-native";
+import { View, Text, StyleSheet, Image, Alert } from "react-native";
 import AuthContent from "../components/Auth/AuthContent";
 import LoadingOverlay from "../components/LoadingOverlay";
 import { AuthContext } from "../store/auth-context";
@@ -31,6 +31,11 @@ function Login() {
         style={styles.newLogo}
       />
       <AuthContent isLogin onAuthenticate={LoginHandler} />
+      <Text
+        style={{ textAlignVertical: "center", fontSize: 10, height: "35%" }}
+      >
+        All icon in 스마트 플랜트 made by Freepik from www.flaticon.com
+      </Text>
     </View>
   );
 }
