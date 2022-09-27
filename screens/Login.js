@@ -31,11 +31,6 @@ function Login() {
         style={styles.newLogo}
       />
       <AuthContent isLogin onAuthenticate={LoginHandler} />
-      <Text
-        style={{ textAlignVertical: "center", fontSize: 10, height: "35%" }}
-      >
-        All icon in 스마트 플랜트 made by Freepik from www.flaticon.com
-      </Text>
     </View>
   );
 }

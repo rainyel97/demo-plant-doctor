@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { AuthContext } from "../store/auth-context";
-import { View, StyleSheet, Image, ImageBackground } from "react-native";
+import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
 import HomeBtn from "../components/HomeBtn";
 //
 import iconSearch from "../assets/search.png";
