@@ -16,7 +16,10 @@ function Login() {
       authCtx.authenticate(token);
       authCtx.memoryUser(email);
     } catch (error) {
-      Alert.alert("로그인에 실패하였습니다!", "등록되지 않은 정보입니다.");
+      Alert.alert(
+        "로그인에 실패하였습니다!",
+        "등록되지 않은 정보이거나 비밀번호가 일치하지 않습니다."
+      );
       //setIsAuthenticating(false);
     }
   }
