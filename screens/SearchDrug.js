@@ -14,7 +14,7 @@ function SearchDrug() {
   const [x, setX] = useState();
   const [y, setY] = useState();
   const [data, setData] = useState([]);
-
+  const [count, setCount] = useState();
   useEffect(() => {
     getLocation();
     console.log(x, y);
@@ -45,31 +45,44 @@ function SearchDrug() {
         }
       );
       setData(res.data.documents);
+      setCount(res.data.meta.total_count);
     } catch (error) {
       console.log(error);
     }
     console.log(data);
+    console.log(count);
   }
 
   return (
     <View style={styles.container}>
       <Text style={{ fontSize: 20, padding: 10 }}>
-        당신의 위치에서 20Km이내에서 찾은 15개의 결과입니다...
+        {count === 0
+          ? "죄송합니다. 검색결과가 없습니다..."
+          : `당신의 위치에서 20Km이내에서 찾은 ${count}개의 결과입니다...`}
       </Text>
       <FlatList
         data={data}
         renderItem={({ item }) => (
           <View style={styles.item}>
             <View>
-              <Text>{item.place_name}</Text>
-              <Text>{item.phone ? item.phone : "전화번호가 없습니다..."}</Text>
+              <Text style={{ fontWeight: "bold" }}>{item.place_name}</Text>
+              <Text>
+                {item.phone ? item.phone : "등록된 전화번호가 없습니다..."}
+              </Text>
               <Text>{item.address_name}</Text>
             </View>
             <TouchableOpacity
               onPress={() => Linking.openURL(item.place_url)}
-              style={{ backgroundColor: "lightgreen", borderRadius: 8 }}
+              style={{
+                backgroundColor: "lightgreen",
+                borderRadius: 8,
+                width: 90,
+                height: 45,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
             >
-              <Text style={{ fontSize: 20, padding: 5 }}>상세정보보기</Text>
+              <Text style={{ fontSize: 18, padding: 5 }}>상세정보</Text>
             </TouchableOpacity>
           </View>
         )}
