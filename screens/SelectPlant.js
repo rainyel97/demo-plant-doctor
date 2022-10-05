@@ -3,6 +3,8 @@ import { View, StyleSheet, ImageBackground } from "react-native";
 import Pepper from "../assets/pepper.jpg";
 import Cabbage from "../assets/cabbage.jpg";
 import WelshOnion from "../assets/welshonion.jpg";
+import Bean from "../assets/bean.jpg";
+import Radish from "../assets/radish.jpg";
 // components
 import Item from "../components/item";
 
@@ -31,6 +33,16 @@ function SelectPlant({ navigation }) {
           onPress={pressHandler.bind(this, "배추")}
         >
           배추
+        </Item>
+        <Item image={Bean} plant="bean" onPress={pressHandler.bind(this, "콩")}>
+          콩
+        </Item>
+        <Item
+          image={Radish}
+          plant="radish"
+          onPress={pressHandler.bind(this, "무")}
+        >
+          무
         </Item>
         <Item
           image={WelshOnion}

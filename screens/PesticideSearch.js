@@ -11,7 +11,7 @@ function PesticideSearch({ route }) {
   else if (pest === "고추흰가루병")
     url =
       "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=흰가루병&skCorpName=고추";
-  else if (pest === "배추검음썩음병")
+  else if (pest === "배추검은썩음병")
     url =
       "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=검은썩음병&skCorpName=배추";
   else if (pest === "배추노균병")
@@ -26,6 +26,18 @@ function PesticideSearch({ route }) {
   else if (pest === "파녹병")
     url =
       "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=녹병&skCorpName=파";
+  else if (pest === "콩점무늬병")
+    url =
+      "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=점무늬병&skCorpName=콩";
+  else if (pest === "콩불마름병")
+    url =
+      "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=불마름병&skCorpName=콩";
+  else if (pest === "무노균병")
+    url =
+      "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=노균병&skCorpName=무";
+  else if (pest === "무검은무늬병")
+    url =
+      "https://ncpms.rda.go.kr/mobile/UntySrcPstcLstR2.ms?skDiseaseWeedName=검은무늬병&skCorpName=무";
 
   console.log(pest);
   console.log(url);

@@ -25,8 +25,8 @@ function SelectImage({ route, navigation }) {
       cameraPermissionInformation.status === ImagePicker.PermissionStatus.DENIED
     ) {
       Alert.alert(
-        "Insufficient Permissions!",
-        "You need to grant camera permissions to use this app."
+        "요청이 거부되었습니다!",
+        "기능을 사용하기 위해 카메라 권한이 필요합니다."
       );
       return false;
     }

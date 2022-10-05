@@ -13,7 +13,7 @@ function Result({ route, navigation }) {
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
   const img = route.params.image;
   const acc = undefined;
-  const pest = "고추탄저병";
+  const pest = "무검은무늬병";
   function showPestHandler() {
     navigation.navigate("PestSearch", { pest: pest });
   }
