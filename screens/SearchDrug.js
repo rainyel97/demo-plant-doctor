@@ -21,11 +21,11 @@ function SearchDrug() {
     getListKakao();
   }, [x, y]);
   async function getLocation() {
-    let { status } = await Location.requestForegroundPermissionsAsync();
+    const { status } = await Location.requestForegroundPermissionsAsync();
     if (status !== "granted") {
       Alert.alert(
         "현재위치를 찾을 수 없습니다.",
-        "위치 권한 요청이 거부되었습니다."
+        "위치 권한 요청이 거부되었습니다.        설정에서 권한을 허용해주세요."
       );
       return;
     }
