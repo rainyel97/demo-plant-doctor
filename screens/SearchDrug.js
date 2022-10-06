@@ -22,7 +22,8 @@ function SearchDrug() {
   }, [x, y]);
   async function getLocation() {
     const { status } = await Location.requestForegroundPermissionsAsync();
-    if (status !== "granted") {
+    let finalstatus = status;
+    if (finalstatus !== "granted") {
       Alert.alert(
         "현재위치를 찾을 수 없습니다.",
         "위치 권한 요청이 거부되었습니다.        설정에서 권한을 허용해주세요."
@@ -58,36 +59,42 @@ function SearchDrug() {
       <Text style={{ fontSize: 20, padding: 10 }}>
         {count === 0
           ? "죄송합니다. 검색결과가 없습니다..."
-          : `당신의 위치에서 20Km이내에서 찾은 ${count}개의 결과입니다...`}
+          : `당신의 위치에서 20Km이내에서 찾은 결과입니다...`}
       </Text>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => (
-          <View style={styles.item}>
-            <View>
-              <Text style={{ fontWeight: "bold" }}>{item.place_name}</Text>
-              <Text>
-                {item.phone ? item.phone : "등록된 전화번호가 없습니다..."}
-              </Text>
-              <Text>{item.address_name}</Text>
+      {count === undefined ? (
+        <Text style={{ fontSize: 20, padding: 10 }}>
+          결과를 불러오는 중입니다...
+        </Text>
+      ) : (
+        <FlatList
+          data={data}
+          renderItem={({ item }) => (
+            <View style={styles.item}>
+              <View>
+                <Text style={{ fontWeight: "bold" }}>{item.place_name}</Text>
+                <Text>
+                  {item.phone ? item.phone : "등록된 전화번호가 없습니다..."}
+                </Text>
+                <Text>{item.address_name}</Text>
+              </View>
+              <TouchableOpacity
+                onPress={() => Linking.openURL(item.place_url)}
+                style={{
+                  backgroundColor: "lightgreen",
+                  borderRadius: 8,
+                  width: 90,
+                  height: 45,
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <Text style={{ fontSize: 18, padding: 5 }}>상세정보</Text>
+              </TouchableOpacity>
             </View>
-            <TouchableOpacity
-              onPress={() => Linking.openURL(item.place_url)}
-              style={{
-                backgroundColor: "lightgreen",
-                borderRadius: 8,
-                width: 90,
-                height: 45,
-                justifyContent: "center",
-                alignItems: "center",
-              }}
-            >
-              <Text style={{ fontSize: 18, padding: 5 }}>상세정보</Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        keyExtractor={(item) => item.id}
-      />
+          )}
+          keyExtractor={(item) => item.id}
+        />
+      )}
     </View>
   );
 }

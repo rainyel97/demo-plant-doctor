@@ -21,6 +21,14 @@ function WelshHis() {
   return <Text>welshonion</Text>;
 }
 
+function BeanHis() {
+  return <Text>bean</Text>;
+}
+
+function RadishHis() {
+  return <Text>radish</Text>;
+}
+
 function History() {
   const authCtx = useContext(AuthContext);
   const userEmail = authCtx.email; // 사용자에따라 다른 데이터 로드를 위함.
@@ -28,7 +36,8 @@ function History() {
     <Tab.Navigator
       initialRouteName="All"
       screenOptions={{
-        tabBarLabelStyle: { color: "black", fontSize: 13 },
+        tabBarStyle: { height: 70 },
+        tabBarLabelStyle: { color: "black", fontSize: 17 },
         tabBarActiveTinitColor: "black",
         tabBarActiveBackgroundColor: "lightgreen",
       }}
@@ -43,7 +52,7 @@ function History() {
             <Image
               source={require("../assets/icon_all.png")}
               resizeMode="cover"
-              style={{ transform: [{ scale: 0.05 }] }}
+              style={{ transform: [{ scale: 0.06 }] }}
             />
           ),
         }}
@@ -58,7 +67,7 @@ function History() {
             <Image
               source={require("../assets/icon_pepper.png")}
               resizeMode="cover"
-              style={{ transform: [{ scale: 0.05 }] }}
+              style={{ transform: [{ scale: 0.07 }] }}
             />
           ),
         }}
@@ -73,7 +82,37 @@ function History() {
             <Image
               source={require("../assets/icon_cabbage.png")}
               resizeMode="cover"
-              style={{ transform: [{ scale: 0.05 }] }}
+              style={{ transform: [{ scale: 0.07 }] }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Bean"
+        component={BeanHis}
+        options={{
+          headerShown: false,
+          title: "콩",
+          tabBarIcon: () => (
+            <Image
+              source={require("../assets/icon_bean.png")}
+              resizeMode="contain"
+              style={{ transform: [{ scale: 0.07 }] }}
+            />
+          ),
+        }}
+      />
+      <Tab.Screen
+        name="Radish"
+        component={RadishHis}
+        options={{
+          headerShown: false,
+          title: "무",
+          tabBarIcon: () => (
+            <Image
+              source={require("../assets/icon_radish.png")}
+              resizeMode="contain"
+              style={{ transform: [{ scale: 0.07 }] }}
             />
           ),
         }}
@@ -88,7 +127,7 @@ function History() {
             <Image
               source={require("../assets/icon_welshonion.png")}
               resizeMode="contain"
-              style={{ transform: [{ scale: 0.05 }] }}
+              style={{ transform: [{ scale: 0.07 }] }}
             />
           ),
         }}

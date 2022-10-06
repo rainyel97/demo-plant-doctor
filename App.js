@@ -68,7 +68,7 @@ function AuthenticatedStack() {
         name="SelectImage"
         component={SelectImage}
         options={{
-          title: "이미지를 추가하세요",
+          title: "이미지를 등록하세요",
         }}
       />
       <Stack.Screen
