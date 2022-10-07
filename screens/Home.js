@@ -1,6 +1,13 @@
 import { useContext } from "react";
 import { AuthContext } from "../store/auth-context";
-import { View, Text, StyleSheet, Image, ImageBackground } from "react-native";
+import {
+  View,
+  Text,
+  StyleSheet,
+  Image,
+  ImageBackground,
+  Pressable,
+} from "react-native";
 import HomeBtn from "../components/HomeBtn";
 //
 import iconSearch from "../assets/search.png";
@@ -16,8 +23,11 @@ function Home({ navigation }) {
   function HistoryPressHandler() {
     navigation.navigate("History");
   }
-  function GoogleMapPressHandler() {
+  function SearchDrugHandler() {
     navigation.navigate("SearchDrug");
+  }
+  function PestNoticeHandler() {
+    navigation.navigate("PestNotice");
   }
 
   return (
@@ -36,11 +46,7 @@ function Home({ navigation }) {
           >
             병충해 검사하기
           </HomeBtn>
-          <HomeBtn
-            icon={iconDrug}
-            onPress={GoogleMapPressHandler}
-            color="#FFEB3B"
-          >
+          <HomeBtn icon={iconDrug} onPress={SearchDrugHandler} color="#FFEB3B">
             농약사 찾아보기
           </HomeBtn>
         </View>
@@ -55,6 +61,18 @@ function Home({ navigation }) {
           <HomeBtn icon={iconLogout} onPress={authCtx.logout} color="#E53935">
             로그아웃
           </HomeBtn>
+        </View>
+        <View style={styles.NoticeContainer}>
+          <Pressable
+            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+            onPress={PestNoticeHandler}
+          >
+            <View style={styles.textContainer}>
+              <Text style={{ fontWeight: "bold", fontSize: 20 }}>
+                월간 병충해 발생 정보
+              </Text>
+            </View>
+          </Pressable>
         </View>
       </View>
     </ImageBackground>
@@ -71,13 +89,35 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    marginVertical: 60,
+    marginVertical: 45,
     width: 160,
     height: 130,
   },
   btnContainer: {
     marginVertical: 17,
     flexDirection: "row",
+  },
+  textContainer: {
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  pressed: {
+    opacity: 0.7,
+  },
+  NoticeContainer: {
+    margin: 16,
+    justifyContent: "center",
+    padding: 10,
+    height: 50,
+    borderRadius: 10,
+    elevation: 4,
+    opacity: 0.9,
+    backgroundColor: "white",
+    shadowColor: "black",
+    shadowOpacity: 0.25,
+    shadowOffset: { width: 0, height: 2 },
+    shadowRadius: 8,
+    overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
 });
 

@@ -35,10 +35,7 @@ function AuthContent({ isLogin, onAuthenticate }) {
       !passwordIsValid ||
       (!isLogin && (!emailsAreEqual || !passwordsAreEqual))
     ) {
-      Alert.alert(
-        "올바르지 않은 입력입니다.",
-        "이메일은 '@'가 포함된 형식입니다.         비밀번호는 최소 6자 이상입니다.                      이메일 또는 비밀번호 확인이 일치하는지 확인하세요."
-      );
+      Alert.alert("올바르지 않은 입력입니다.", "입력정보를 다시 확인하세요.");
       setCredentialsInvalid({
         email: !emailIsValid,
         confirmEmail: !emailIsValid || !emailsAreEqual,

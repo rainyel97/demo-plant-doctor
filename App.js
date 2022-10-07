@@ -14,6 +14,7 @@ import SelectImage from "./screens/SelectImage";
 import Result from "./screens/Result";
 import PestSearch from "./screens/PestSearch";
 import PesticideSearch from "./screens/PesticideSearch";
+import PestNotice from "./screens/PestNotice";
 import AuthContextProvider, { AuthContext } from "./store/auth-context";
 //
 const Stack = createNativeStackNavigator();
@@ -55,6 +56,13 @@ function AuthenticatedStack() {
         component={SearchDrug}
         options={{
           title: "가까운 농약사 찾기",
+        }}
+      />
+      <Stack.Screen
+        name="PestNotice"
+        component={PestNotice}
+        options={{
+          title: "월간 병충해 발생 정보",
         }}
       />
       <Stack.Screen
