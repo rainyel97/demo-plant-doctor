@@ -1,4 +1,4 @@
-import { useContext } from "react";
+import { useState, useContext } from "react";
 import { AuthContext } from "../store/auth-context";
 import {
   View,
@@ -7,6 +7,7 @@ import {
   Image,
   ImageBackground,
   Pressable,
+  Modal,
 } from "react-native";
 import HomeBtn from "../components/HomeBtn";
 //
@@ -16,6 +17,7 @@ import iconHistory from "../assets/history.png";
 import iconLogout from "../assets/logout.png";
 //
 function Home({ navigation }) {
+  const [modalVisible, setModalVisible] = useState(true);
   const authCtx = useContext(AuthContext);
   function SelectPlantPressHandler() {
     navigation.navigate("SelectPlant");
@@ -36,6 +38,34 @@ function Home({ navigation }) {
       resizeMode="cover"
       style={styles.back}
     >
+      <Modal
+        animationType="slide"
+        transparent={true}
+        visible={modalVisible}
+        onRequestClose={() => {
+          setModalVisible(!modalVisible);
+        }}
+      >
+        <View style={styles.centeredView}>
+          <View style={styles.modalView}>
+            <Text style={styles.modalText}>
+              월간 병충해 발생 정보가 10월로 업데이트 되었습니다!
+            </Text>
+            <Text style={[styles.modalText, { color: "blue" }]}>
+              최신정보를 확인하실 것을 권장합니다.
+            </Text>
+            <Pressable
+              style={({ pressed }) => [
+                styles.button,
+                pressed && styles.pressed,
+              ]}
+              onPress={() => setModalVisible(!modalVisible)}
+            >
+              <Text style={styles.textStyle}>알겠습니다</Text>
+            </Pressable>
+          </View>
+        </View>
+      </Modal>
       <View style={styles.container}>
         <Image source={require("../assets/homelogo.png")} style={styles.logo} />
         <View style={styles.btnContainer}>
@@ -64,7 +94,7 @@ function Home({ navigation }) {
         </View>
         <View style={styles.NoticeContainer}>
           <Pressable
-            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
+            style={({ pressed }) => [pressed && styles.pressed]}
             onPress={PestNoticeHandler}
           >
             <View style={styles.textContainer}>
@@ -89,7 +119,8 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   logo: {
-    marginVertical: 45,
+    marginTop: 100,
+    marginBottom: 45,
     width: 160,
     height: 130,
   },
@@ -118,6 +149,44 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 8,
     overflow: Platform.OS === "android" ? "hidden" : "visible",
+  },
+  centeredView: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "rgba(0, 0, 0, 0.4)",
+    marginTop: 22,
+  },
+  modalView: {
+    margin: 20,
+    backgroundColor: "white",
+    borderRadius: 1,
+    padding: 20,
+    alignItems: "center",
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 2,
+    },
+    shadowOpacity: 0.25,
+    shadowRadius: 4,
+    elevation: 5,
+  },
+  button: {
+    backgroundColor: "green",
+    borderRadius: 15,
+    padding: 10,
+    elevation: 2,
+  },
+  textStyle: {
+    color: "white",
+    fontWeight: "bold",
+    textAlign: "center",
+  },
+  modalText: {
+    fontWeight: "bold",
+    marginBottom: 10,
+    textAlign: "center",
   },
 });
 
