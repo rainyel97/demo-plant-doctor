@@ -1,5 +1,6 @@
-import { useState, useContext } from "react";
+import { useState, useContext, useEffect } from "react";
 import { AuthContext } from "../store/auth-context";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import {
   View,
   Text,
@@ -17,7 +18,15 @@ import iconHistory from "../assets/history.png";
 import iconLogout from "../assets/logout.png";
 //
 function Home({ navigation }) {
-  const [modalVisible, setModalVisible] = useState(true);
+  const [modalVisible, setModalVisible] = useState(false);
+  //AsyncStorage.setItem("memory", "false");
+  useEffect(() => {
+    AsyncStorage.getItem("memory", (err, result) => {
+      if (result === "true") setModalVisible(false);
+      else setModalVisible(true);
+      console.log(result);
+    });
+  }, []);
   const authCtx = useContext(AuthContext);
   function SelectPlantPressHandler() {
     navigation.navigate("SelectPlant");
@@ -30,6 +39,11 @@ function Home({ navigation }) {
   }
   function PestNoticeHandler() {
     navigation.navigate("PestNotice");
+  }
+
+  function memoryClick() {
+    setModalVisible(!modalVisible);
+    AsyncStorage.setItem("memory", "true");
   }
 
   return (
@@ -59,9 +73,9 @@ function Home({ navigation }) {
                 styles.button,
                 pressed && styles.pressed,
               ]}
-              onPress={() => setModalVisible(!modalVisible)}
+              onPress={memoryClick}
             >
-              <Text style={styles.textStyle}>알겠습니다</Text>
+              <Text style={styles.textStyle}>다시 열지 않기</Text>
             </Pressable>
           </View>
         </View>
