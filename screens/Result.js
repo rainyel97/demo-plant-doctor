@@ -1,4 +1,4 @@
-import { useContext, useState } from "react";
+import { useContext, useEffect } from "react";
 import {
   View,
   Text,
@@ -7,11 +7,8 @@ import {
   Pressable,
   ScrollView,
 } from "react-native";
-import { AuthContext } from "../store/auth-context";
 function Result({ route, navigation }) {
-  const authCtx = useContext(AuthContext);
-  const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
-  const img = route.params.image;
+  const img = route.params.image; //검사에 쓰일 이미지
   const acc = undefined;
   const pest = "무검은무늬병";
   function showPestHandler() {
@@ -28,7 +25,10 @@ function Result({ route, navigation }) {
     <ScrollView>
       <View style={styles.container}>
         <View style={styles.imageBox}>
-          <Image source={{ uri: img }} style={{ width: 300, height: 300 }} />
+          <Image
+            source={{ uri: img.uri }}
+            style={{ width: 300, height: 300 }}
+          />
         </View>
         <View style={styles.resultTextContainer}>
           <Text style={styles.resultText}>해당 작물의 검사 결과는...?</Text>

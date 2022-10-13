@@ -1,12 +1,39 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { Pressable, View, Text, StyleSheet, Image, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
-
+import { AuthContext } from "../store/auth-context";
 function SelectImage({ route, navigation }) {
   const [image, setImage] = useState(null);
+  const authCtx = useContext(AuthContext);
+  const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
   //const plantId = route.params.plantId;
-  function getResult() {
-    navigation.navigate("Result", { image: image });
+  async function getResult() {
+    const body = new FormData();
+    let file = {
+      uri: image.uri,
+      type: image.type, // image/jpeg
+      name: image.name,
+    };
+    body.append("images", file);
+    console.log(file.uri);
+    console.log(file.type);
+    console.log(file.name);
+    await fetch(`3.38.14.197:3001/api/users/${userEmail}/post`, {
+      method: "POST",
+      body: body,
+      headers: {
+        "Content-Type": "multipart/form-data",
+      },
+    })
+      .then((res) => {
+        console.log("성공");
+        console.log(res);
+      })
+      .catch((err) => {
+        console.log("에러");
+        console.log(err.response);
+      });
+    navigation.navigate("Result", { image: image }); //이때 정확도랑 병명까지 넘겨줘야함
   }
   const [cameraPermissionInformation, requestPermission] =
     ImagePicker.useCameraPermissions();
@@ -48,7 +75,7 @@ function SelectImage({ route, navigation }) {
     console.log(result);
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      setImage(result);
     }
   }
 
@@ -68,14 +95,17 @@ function SelectImage({ route, navigation }) {
     console.log(result);
 
     if (!result.cancelled) {
-      setImage(result.uri);
+      setImage(result);
     }
   }
   return (
     <View style={styles.container}>
       <View style={styles.imageBox}>
         {image ? (
-          <Image source={{ uri: image }} style={{ width: 300, height: 300 }} />
+          <Image
+            source={{ uri: image.uri }}
+            style={{ width: 300, height: 300 }}
+          />
         ) : (
           <Text>이미지를 등록하세요</Text>
         )}
