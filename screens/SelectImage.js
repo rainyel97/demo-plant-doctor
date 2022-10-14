@@ -30,6 +30,9 @@ function SelectImage({ route, navigation }) {
       },
       data: formData,
     });
+    console.log(localUri);
+    console.log(filename);
+    console.log(type);
     navigation.navigate("Result", { image: image }); //이때 정확도랑 병명까지 넘겨줘야함
   }
   const [cameraPermissionInformation, requestPermission] =
