@@ -2,37 +2,34 @@ import { useState, useContext } from "react";
 import { Pressable, View, Text, StyleSheet, Image, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { AuthContext } from "../store/auth-context";
+import axios from "axios";
 function SelectImage({ route, navigation }) {
   const [image, setImage] = useState(null);
   const authCtx = useContext(AuthContext);
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
   //const plantId = route.params.plantId;
   async function getResult() {
-    const body = new FormData();
-    let file = {
-      uri: image.uri,
-      type: image.type, // image/jpeg
-      name: image.name,
-    };
-    body.append("images", file);
-    console.log(file.uri);
-    console.log(file.type);
-    console.log(file.name);
-    await fetch(`3.38.14.197:3001/api/users/${userEmail}/post`, {
-      method: "POST",
-      body: body,
+    // const response = await axios.post(
+    //   `http://3.38.14.197:3001/api/users/${userEmail}/post`,
+    //   {
+    //     name: "hotelName",
+    //   }
+    // );
+    // console.log(response.data);
+    const localUri = image.uri;
+    const filename = localUri.split("/").pop();
+    const match = /\.(\w+)$/.exec(filename ?? "");
+    const type = match ? `image/${match[1]}` : `image`;
+    const formData = new FormData();
+    formData.append("image", { uri: localUri, name: filename, type });
+    await axios({
+      method: "post",
+      url: `http://3.38.14.197:3001/api/users/${userEmail}/post`,
       headers: {
-        "Content-Type": "multipart/form-data",
+        "content-type": "multipart/form-data",
       },
-    })
-      .then((res) => {
-        console.log("성공");
-        console.log(res);
-      })
-      .catch((err) => {
-        console.log("에러");
-        console.log(err.response);
-      });
+      data: formData,
+    });
     navigation.navigate("Result", { image: image }); //이때 정확도랑 병명까지 넘겨줘야함
   }
   const [cameraPermissionInformation, requestPermission] =
