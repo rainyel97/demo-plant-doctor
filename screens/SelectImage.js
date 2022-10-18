@@ -5,6 +5,7 @@ import { AuthContext } from "../store/auth-context";
 import axios from "axios";
 function SelectImage({ route, navigation }) {
   const [image, setImage] = useState(null);
+  const selectedPlant = route.params.plantId;
   const authCtx = useContext(AuthContext);
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
   //const plantId = route.params.plantId;
@@ -107,7 +108,7 @@ function SelectImage({ route, navigation }) {
             style={{ width: 300, height: 300 }}
           />
         ) : (
-          <Text>이미지를 등록하세요</Text>
+          <Text>{selectedPlant} 이미지를 등록하세요</Text>
         )}
       </View>
       <Pressable
