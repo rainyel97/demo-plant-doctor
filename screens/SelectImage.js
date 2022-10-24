@@ -10,13 +10,6 @@ function SelectImage({ route, navigation }) {
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
   //const plantId = route.params.plantId;
   async function getResult() {
-    // const response = await axios.post(
-    //   `http://3.38.14.197:3001/api/users/${userEmail}/post`,
-    //   {
-    //     name: "hotelName",
-    //   }
-    // );
-    // console.log(response.data);
     const localUri = image.uri;
     const filename = localUri.split("/").pop();
     const match = /\.(\w+)$/.exec(filename ?? "");
