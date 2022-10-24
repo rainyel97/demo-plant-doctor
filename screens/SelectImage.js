@@ -25,7 +25,7 @@ function SelectImage({ route, navigation }) {
     formData.append("image", { uri: localUri, name: filename, type });
     await axios({
       method: "post",
-      url: `http://3.38.14.197:3001/api/users/${userEmail}/post`,
+      url: `http://3.38.14.197:3001/api/users/${userEmail}/post/${selectedPlant}`,
       headers: {
         "content-type": "multipart/form-data",
       },
