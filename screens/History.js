@@ -1,48 +1,424 @@
-import { View, Text, Image, StyleSheet } from "react-native";
-import { useState, useEffect, useContext } from "react";
+import {
+  View,
+  Text,
+  Image,
+  StyleSheet,
+  FlatList,
+  TouchableOpacity,
+} from "react-native";
+import { useEffect, useContext } from "react";
 import { AuthContext } from "../store/auth-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-
+import exampleImg from "../assets/pepper.jpg";
 const Tab = createBottomTabNavigator();
 
-//네비게이션을 이용해 작물별로 구현, 목록은 item 컴포넌트 활용
-function AllHis() {
-  return <Text>all</Text>;
+function getResult(userEmail) {
+  //서버로부터 데이터 받아오는 코드(유저이메일을 변수로받아야함)
+}
+function removeResult(toRemoveIdx) {
+  //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
+}
+//내역이 저장될 객체 배열
+const result = [
+  {
+    image: exampleImg,
+    pest: "고추탄저병",
+    acc: 99,
+    idx: 1,
+    createdTime: "2022/10/15 21:11",
+  },
+  {
+    image: exampleImg,
+    pest: "고추흰가루병",
+    acc: 98,
+    idx: 2,
+    createdTime: "2022/10/16 21:11",
+  },
+  {
+    image: exampleImg,
+    pest: "배추노균병",
+    acc: 97,
+    idx: 3,
+    createdTime: "2022/10/17 21:11",
+  },
+  {
+    image: exampleImg,
+    pest: "파녹병",
+    acc: 96,
+    idx: 4,
+    createdTime: "2022/10/18 21:11",
+  },
+  {
+    image: exampleImg,
+    pest: "콩불마름병",
+    acc: 95,
+    idx: 5,
+    createdTime: "2022/10/19 21:11",
+  },
+  {
+    image: exampleImg,
+    pest: "무노균병",
+    acc: 94,
+    idx: 6,
+    createdTime: "2022/10/20 21:11",
+  },
+];
+//네비게이션을 이용해 작물별로 구현
+function AllHis({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={result}
+        renderItem={({ item }) => (
+          <View style={{ alignItems: "center", borderWidth: 2 }}>
+            <TouchableOpacity
+              key={item.idx}
+              onPress={() =>
+                navigation.navigate("Result", {
+                  pest: item.pest,
+                  acc: item.acc,
+                  image: item.image,
+                })
+              }
+              style={{ padding: 10, height: 200, alignItems: "center" }}
+            >
+              <Image
+                source={item.image}
+                style={{ marginHorizontal: 10, width: 150, height: 150 }}
+              />
+              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
+                {item.createdTime}
+              </Text>
+              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
+                {item.pest}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                margin: 5,
+                padding: 7,
+                width: 100,
+                alignItems: "center",
+                borderRadius: 16,
+                backgroundColor: "red",
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                }}
+              >
+                삭제
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        keyExtractor={(item) => item.idx}
+        numColumns={2}
+      />
+    </View>
+  );
 }
 
-function PepperHis() {
-  return <Text>pepper</Text>;
+function PepperHis({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={result.filter((item) => item.pest.includes("고추"))}
+        renderItem={({ item }) => (
+          <View style={{ alignItems: "center", borderWidth: 2 }}>
+            <TouchableOpacity
+              key={item.idx}
+              onPress={() =>
+                navigation.navigate("Result", {
+                  pest: item.pest,
+                  acc: item.acc,
+                  image: item.image,
+                })
+              }
+              style={{ padding: 10, height: 200, alignItems: "center" }}
+            >
+              <Image
+                source={item.image}
+                style={{ marginHorizontal: 10, width: 150, height: 150 }}
+              />
+              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
+                {item.createdTime}
+              </Text>
+              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
+                {item.pest}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                margin: 5,
+                padding: 7,
+                width: 100,
+                alignItems: "center",
+                borderRadius: 16,
+                backgroundColor: "red",
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                }}
+              >
+                삭제
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        keyExtractor={(item) => item.idx}
+        numColumns={2}
+      />
+    </View>
+  );
 }
 
-function CabbageHis() {
-  return <Text>cabbage</Text>;
+function CabbageHis({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={result.filter((item) => item.pest.includes("배추"))}
+        renderItem={({ item }) => (
+          <View style={{ alignItems: "center", borderWidth: 2 }}>
+            <TouchableOpacity
+              key={item.idx}
+              onPress={() =>
+                navigation.navigate("Result", {
+                  pest: item.pest,
+                  acc: item.acc,
+                  image: item.image,
+                })
+              }
+              style={{ padding: 10, height: 200, alignItems: "center" }}
+            >
+              <Image
+                source={item.image}
+                style={{ marginHorizontal: 10, width: 150, height: 150 }}
+              />
+              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
+                {item.createdTime}
+              </Text>
+              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
+                {item.pest}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                margin: 5,
+                padding: 7,
+                width: 100,
+                alignItems: "center",
+                borderRadius: 16,
+                backgroundColor: "red",
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                }}
+              >
+                삭제
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        keyExtractor={(item) => item.idx}
+        numColumns={2}
+      />
+    </View>
+  );
 }
 
-function WelshHis() {
-  return <Text>welshonion</Text>;
+function WelshHis({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={result.filter((item) => item.pest.includes("파"))}
+        renderItem={({ item }) => (
+          <View style={{ alignItems: "center", borderWidth: 2 }}>
+            <TouchableOpacity
+              key={item.idx}
+              onPress={() =>
+                navigation.navigate("Result", {
+                  pest: item.pest,
+                  acc: item.acc,
+                  image: item.image,
+                })
+              }
+              style={{ padding: 10, height: 200, alignItems: "center" }}
+            >
+              <Image
+                source={item.image}
+                style={{ marginHorizontal: 10, width: 150, height: 150 }}
+              />
+              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
+                {item.createdTime}
+              </Text>
+              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
+                {item.pest}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                margin: 5,
+                padding: 7,
+                width: 100,
+                alignItems: "center",
+                borderRadius: 16,
+                backgroundColor: "red",
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                }}
+              >
+                삭제
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        keyExtractor={(item) => item.idx}
+        numColumns={2}
+      />
+    </View>
+  );
 }
 
-function BeanHis() {
-  return <Text>bean</Text>;
+function BeanHis({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={result.filter((item) => item.pest.includes("콩"))}
+        renderItem={({ item }) => (
+          <View style={{ alignItems: "center", borderWidth: 2 }}>
+            <TouchableOpacity
+              key={item.idx}
+              onPress={() =>
+                navigation.navigate("Result", {
+                  pest: item.pest,
+                  acc: item.acc,
+                  image: item.image,
+                })
+              }
+              style={{ padding: 10, height: 200, alignItems: "center" }}
+            >
+              <Image
+                source={item.image}
+                style={{ marginHorizontal: 10, width: 150, height: 150 }}
+              />
+              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
+                {item.createdTime}
+              </Text>
+              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
+                {item.pest}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                margin: 5,
+                padding: 7,
+                width: 100,
+                alignItems: "center",
+                borderRadius: 16,
+                backgroundColor: "red",
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                }}
+              >
+                삭제
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        keyExtractor={(item) => item.idx}
+        numColumns={2}
+      />
+    </View>
+  );
 }
 
-function RadishHis() {
-  return <Text>radish</Text>;
+function RadishHis({ navigation }) {
+  return (
+    <View style={styles.container}>
+      <FlatList
+        data={result.filter((item) => item.pest.includes("무"))}
+        renderItem={({ item }) => (
+          <View style={{ alignItems: "center", borderWidth: 2 }}>
+            <TouchableOpacity
+              key={item.idx}
+              onPress={() =>
+                navigation.navigate("Result", {
+                  pest: item.pest,
+                  acc: item.acc,
+                  image: item.image,
+                })
+              }
+              style={{ padding: 10, height: 200, alignItems: "center" }}
+            >
+              <Image
+                source={item.image}
+                style={{ marginHorizontal: 10, width: 150, height: 150 }}
+              />
+              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
+                {item.createdTime}
+              </Text>
+              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
+                {item.pest}
+              </Text>
+            </TouchableOpacity>
+            <TouchableOpacity
+              style={{
+                margin: 5,
+                padding: 7,
+                width: 100,
+                alignItems: "center",
+                borderRadius: 16,
+                backgroundColor: "red",
+              }}
+            >
+              <Text
+                style={{
+                  textAlign: "center",
+                  fontWeight: "bold",
+                  fontSize: 20,
+                }}
+              >
+                삭제
+              </Text>
+            </TouchableOpacity>
+          </View>
+        )}
+        keyExtractor={(item) => item.idx}
+        numColumns={2}
+      />
+    </View>
+  );
 }
 
 function History() {
-  //const [result, setResult] = useState([]); //결과내역 저장할 객체 배열
-
-  // useEffect(() => {
-  //   getHistory();
-  // }, []);
-
-  // function getHistory() {
-  //   결과내역 받아오는 함수(처음 결과내역을 불러올때 실행되고 그 이후로는 삭제될때 실행됨)
-  //   setResult
-  // }
   const authCtx = useContext(AuthContext);
-  const userEmail = authCtx.email; // 사용자에따라 다른 데이터 로드를 위함.
+  const userEmail = authCtx.email; // 사용자에따라 다른 데이터 로드를 위함. 아래 함수들에서 사용
+  useEffect(() => {
+    //getResult(userEmail);
+  }, []); //처음에 화면이 렌더링 될 때 실행되고 그 이후에는 삭제시에만 실행됨
+
   return (
     <Tab.Navigator
       initialRouteName="All"
@@ -147,6 +523,10 @@ function History() {
   );
 }
 
-const styles = StyleSheet.create({});
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+  },
+});
 
 export default History;

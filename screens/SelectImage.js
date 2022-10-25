@@ -36,10 +36,13 @@ function SelectImage({ route, navigation }) {
       },
       data: formData,
     });
+    //결과 받아오는 api 작성할 부분
+    const acc = 99; //이 부분에 각각 결과값을 대입해주어야함
+    const pest = "무검은무늬병"; //동일
     console.log(localUri);
     console.log(filename);
     console.log(type);
-    navigation.navigate("Result", { image: image }); //이때 정확도랑 병명까지 넘겨줘야함
+    navigation.navigate("Result", { image: image, acc: acc, pest: pest }); //이때 정확도랑 병명까지 넘겨줘야함
   }
   const [cameraPermissionInformation, requestPermission] =
     ImagePicker.useCameraPermissions();

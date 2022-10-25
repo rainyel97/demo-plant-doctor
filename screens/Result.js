@@ -9,8 +9,8 @@ import {
 } from "react-native";
 function Result({ route, navigation }) {
   const img = route.params.image; //검사에 쓰일 이미지
-  const acc = undefined;
-  const pest = "무검은무늬병";
+  const acc = route.params.acc;
+  const pest = route.params.pest;
   function showPestHandler() {
     navigation.navigate("PestSearch", { pest: pest });
   }
