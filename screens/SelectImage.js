@@ -4,8 +4,20 @@ import * as ImagePicker from "expo-image-picker";
 import { AuthContext } from "../store/auth-context";
 import axios from "axios";
 function SelectImage({ route, navigation }) {
+  let plantName;
   const [image, setImage] = useState(null);
   const selectedPlant = route.params.plantId;
+  if (selectedPlant === "고추") {
+    plantName = "pep";
+  } else if (selectedPlant === "배추") {
+    plantName = "cab";
+  } else if (selectedPlant === "콩") {
+    plantName = "bean";
+  } else if (selectedPlant === "무") {
+    plantName = "rad";
+  } else {
+    plantName = "wel";
+  }
   const authCtx = useContext(AuthContext);
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
   //const plantId = route.params.plantId;
@@ -18,7 +30,7 @@ function SelectImage({ route, navigation }) {
     formData.append("image", { uri: localUri, name: filename, type });
     await axios({
       method: "post",
-      url: `http://3.38.14.197:3001/api/users/${userEmail}/post/${selectedPlant}`,
+      url: `http://3.38.14.197:3001/api/users/${userEmail}/post/${plantName}`,
       headers: {
         "content-type": "multipart/form-data",
       },
