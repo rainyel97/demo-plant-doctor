@@ -88,7 +88,7 @@ function Home({ navigation }) {
             onPress={SelectPlantPressHandler}
             color="#8DF389"
           >
-            병해충 검사하기
+            병충해 검사하기
           </HomeBtn>
           <HomeBtn icon={iconDrug} onPress={SearchDrugHandler} color="#FFEB3B">
             농약사 찾아보기
@@ -113,7 +113,7 @@ function Home({ navigation }) {
           >
             <View style={styles.textContainer}>
               <Text style={{ fontWeight: "bold", fontSize: 20 }}>
-                월간 병해충 발생 정보
+                월간 병충해 발생 정보
               </Text>
             </View>
           </Pressable>
