@@ -55,6 +55,8 @@ function PepperHis({ navigation }) {
         renderItem={({ item }) => (
           <View
             style={{
+              justifyContent: "space-between",
+              height: 250,
               width: "47.5%",
               margin: 5,
               alignItems: "center",
@@ -165,6 +167,8 @@ function CabbageHis({ navigation }) {
         renderItem={({ item }) => (
           <View
             style={{
+              justifyContent: "space-between",
+              height: 250,
               width: "47.5%",
               margin: 5,
               alignItems: "center",
@@ -275,6 +279,8 @@ function WelshHis({ navigation }) {
         renderItem={({ item }) => (
           <View
             style={{
+              justifyContent: "space-between",
+              height: 250,
               width: "47.5%",
               margin: 5,
               alignItems: "center",
@@ -385,6 +391,8 @@ function BeanHis({ navigation }) {
         renderItem={({ item }) => (
           <View
             style={{
+              justifyContent: "space-between",
+              height: 250,
               width: "47.5%",
               margin: 5,
               alignItems: "center",
@@ -495,6 +503,8 @@ function RadishHis({ navigation }) {
         renderItem={({ item }) => (
           <View
             style={{
+              justifyContent: "space-between",
+              height: 250,
               width: "47.5%",
               margin: 5,
               alignItems: "center",
