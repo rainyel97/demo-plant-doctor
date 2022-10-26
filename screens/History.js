@@ -6,166 +6,110 @@ import {
   FlatList,
   TouchableOpacity,
 } from "react-native";
-import { useEffect, useContext } from "react";
+import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../store/auth-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import exampleImg from "../assets/pepper.jpg";
+import axios from "axios";
 const Tab = createBottomTabNavigator();
 
-function getResult(userEmail) {
-  //서버로부터 데이터 받아오는 코드(유저이메일을 변수로받아야함)
-}
-function removeResult(toRemoveIdx) {
-  //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
-}
-//내역이 저장될 객체 배열
-const result = [
-  {
-    image: exampleImg,
-    pest: "고추탄저병",
-    acc: 99,
-    idx: 1,
-    createdTime: "2022/10/15 21:11",
-  },
-  {
-    image: exampleImg,
-    pest: "고추흰가루병",
-    acc: 98,
-    idx: 2,
-    createdTime: "2022/10/16 21:11",
-  },
-  {
-    image: exampleImg,
-    pest: "배추노균병",
-    acc: 97,
-    idx: 3,
-    createdTime: "2022/10/17 21:11",
-  },
-  {
-    image: exampleImg,
-    pest: "파녹병",
-    acc: 96,
-    idx: 4,
-    createdTime: "2022/10/18 21:11",
-  },
-  {
-    image: exampleImg,
-    pest: "콩불마름병",
-    acc: 95,
-    idx: 5,
-    createdTime: "2022/10/19 21:11",
-  },
-  {
-    image: exampleImg,
-    pest: "무노균병",
-    acc: 94,
-    idx: 6,
-    createdTime: "2022/10/20 21:11",
-  },
-];
 //네비게이션을 이용해 작물별로 구현
-function AllHis({ navigation }) {
-  return (
-    <View style={styles.container}>
-      <FlatList
-        data={result}
-        renderItem={({ item }) => (
-          <View style={{ alignItems: "center", borderWidth: 2 }}>
-            <TouchableOpacity
-              key={item.idx}
-              onPress={() =>
-                navigation.navigate("Result", {
-                  pest: item.pest,
-                  acc: item.acc,
-                  image: item.image,
-                })
-              }
-              style={{ padding: 10, height: 200, alignItems: "center" }}
-            >
-              <Image
-                source={item.image}
-                style={{ marginHorizontal: 10, width: 150, height: 150 }}
-              />
-              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.createdTime}
-              </Text>
-              <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.pest}
-              </Text>
-            </TouchableOpacity>
-            <TouchableOpacity
-              style={{
-                margin: 5,
-                padding: 7,
-                width: 100,
-                alignItems: "center",
-                borderRadius: 16,
-                backgroundColor: "red",
-              }}
-            >
-              <Text
-                style={{
-                  textAlign: "center",
-                  fontWeight: "bold",
-                  fontSize: 20,
-                }}
-              >
-                삭제
-              </Text>
-            </TouchableOpacity>
-          </View>
-        )}
-        keyExtractor={(item) => item.idx}
-        numColumns={2}
-      />
-    </View>
-  );
-}
 
 function PepperHis({ navigation }) {
+  const authCtx = useContext(AuthContext);
+  const userEmail = authCtx.email;
+  const [result, setResult] = useState([]);
+  useEffect(() => {
+    getResult(userEmail);
+  }, []);
+  async function getResult(userEmail) {
+    await axios
+      .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
+      .catch((err) => console.log(err))
+      .then((res) => {
+        setResult(res.data);
+      });
+    console.log(result);
+    console.log(result.length);
+  }
+
+  function removeResult(toRemoveIdx) {
+    //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
+    console.log(toRemoveIdx);
+  }
   return (
     <View style={styles.container}>
+      {result.filter((item) => item.Plant_type === "pep").length === 0 ? (
+        <View
+          style={{
+            marginTop: 200,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text>검사내역이 없습니다.</Text>
+        </View>
+      ) : null}
       <FlatList
-        data={result.filter((item) => item.pest.includes("고추"))}
+        data={result.filter((item) => item.Plant_type === "pep")}
         renderItem={({ item }) => (
-          <View style={{ alignItems: "center", borderWidth: 2 }}>
+          <View
+            style={{
+              width: "47.5%",
+              margin: 5,
+              alignItems: "center",
+              borderRadius: 8,
+              backgroundColor: "white",
+            }}
+          >
             <TouchableOpacity
-              key={item.idx}
+              key={item.Search_idx}
               onPress={() =>
                 navigation.navigate("Result", {
-                  pest: item.pest,
-                  acc: item.acc,
-                  image: item.image,
+                  pest: item.Pest,
+                  acc: item.Percentage,
+                  image: {
+                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                  },
                 })
               }
               style={{ padding: 10, height: 200, alignItems: "center" }}
             >
               <Image
-                source={item.image}
-                style={{ marginHorizontal: 10, width: 150, height: 150 }}
+                source={{
+                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                }}
+                style={{
+                  marginHorizontal: 10,
+                  width: 150,
+                  height: 150,
+                  borderRadius: 8,
+                }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.createdTime}
+                {item.Created_time}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.pest}
+                {item.Pest}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
                 margin: 5,
                 padding: 7,
-                width: 100,
+                width: 80,
                 alignItems: "center",
-                borderRadius: 16,
+                borderRadius: 8,
                 backgroundColor: "red",
               }}
+              onPress={removeResult.bind(this, item.Search_idx)}
             >
               <Text
                 style={{
                   textAlign: "center",
                   fontWeight: "bold",
-                  fontSize: 20,
+                  fontSize: 16,
+                  color: "white",
                 }}
               >
                 삭제
@@ -173,7 +117,7 @@ function PepperHis({ navigation }) {
             </TouchableOpacity>
           </View>
         )}
-        keyExtractor={(item) => item.idx}
+        keyExtractor={(item) => item.Search_idx}
         numColumns={2}
       />
     </View>
@@ -181,49 +125,101 @@ function PepperHis({ navigation }) {
 }
 
 function CabbageHis({ navigation }) {
+  const authCtx = useContext(AuthContext);
+  const userEmail = authCtx.email;
+  const [result, setResult] = useState([]);
+  useEffect(() => {
+    getResult(userEmail);
+  }, []);
+  async function getResult(userEmail) {
+    await axios
+      .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
+      .catch((err) => console.log(err))
+      .then((res) => {
+        setResult(res.data);
+      });
+    console.log(result);
+    console.log(result.length);
+  }
+
+  function removeResult(toRemoveIdx) {
+    //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
+    console.log(toRemoveIdx);
+  }
   return (
     <View style={styles.container}>
+      {result.filter((item) => item.Plant_type === "cab").length === 0 ? (
+        <View
+          style={{
+            marginTop: 200,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text>검사내역이 없습니다.</Text>
+        </View>
+      ) : null}
       <FlatList
-        data={result.filter((item) => item.pest.includes("배추"))}
+        data={result.filter((item) => item.Plant_type === "cab")}
         renderItem={({ item }) => (
-          <View style={{ alignItems: "center", borderWidth: 2 }}>
+          <View
+            style={{
+              width: "47.5%",
+              margin: 5,
+              alignItems: "center",
+              borderRadius: 8,
+              backgroundColor: "white",
+            }}
+          >
             <TouchableOpacity
-              key={item.idx}
+              key={item.Search_idx}
               onPress={() =>
                 navigation.navigate("Result", {
-                  pest: item.pest,
-                  acc: item.acc,
-                  image: item.image,
+                  pest: item.Pest,
+                  acc: item.Percentage,
+                  image: {
+                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                  },
                 })
               }
               style={{ padding: 10, height: 200, alignItems: "center" }}
             >
               <Image
-                source={item.image}
-                style={{ marginHorizontal: 10, width: 150, height: 150 }}
+                source={{
+                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                }}
+                style={{
+                  marginHorizontal: 10,
+                  width: 150,
+                  height: 150,
+                  borderRadius: 8,
+                }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.createdTime}
+                {item.Created_time}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.pest}
+                {item.Pest}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
                 margin: 5,
                 padding: 7,
-                width: 100,
+                width: 80,
                 alignItems: "center",
-                borderRadius: 16,
+                borderRadius: 8,
                 backgroundColor: "red",
               }}
+              onPress={removeResult.bind(this, item.Search_idx)}
             >
               <Text
                 style={{
                   textAlign: "center",
                   fontWeight: "bold",
-                  fontSize: 20,
+                  fontSize: 16,
+                  color: "white",
                 }}
               >
                 삭제
@@ -231,7 +227,7 @@ function CabbageHis({ navigation }) {
             </TouchableOpacity>
           </View>
         )}
-        keyExtractor={(item) => item.idx}
+        keyExtractor={(item) => item.Search_idx}
         numColumns={2}
       />
     </View>
@@ -239,49 +235,101 @@ function CabbageHis({ navigation }) {
 }
 
 function WelshHis({ navigation }) {
+  const authCtx = useContext(AuthContext);
+  const userEmail = authCtx.email;
+  const [result, setResult] = useState([]);
+  useEffect(() => {
+    getResult(userEmail);
+  }, []);
+  async function getResult(userEmail) {
+    await axios
+      .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
+      .catch((err) => console.log(err))
+      .then((res) => {
+        setResult(res.data);
+      });
+    console.log(result);
+    console.log(result.length);
+  }
+
+  function removeResult(toRemoveIdx) {
+    //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
+    console.log(toRemoveIdx);
+  }
   return (
     <View style={styles.container}>
+      {result.filter((item) => item.Plant_type === "wel").length === 0 ? (
+        <View
+          style={{
+            marginTop: 200,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text>검사내역이 없습니다.</Text>
+        </View>
+      ) : null}
       <FlatList
-        data={result.filter((item) => item.pest.includes("파"))}
+        data={result.filter((item) => item.Plant_type === "wel")}
         renderItem={({ item }) => (
-          <View style={{ alignItems: "center", borderWidth: 2 }}>
+          <View
+            style={{
+              width: "47.5%",
+              margin: 5,
+              alignItems: "center",
+              borderRadius: 8,
+              backgroundColor: "white",
+            }}
+          >
             <TouchableOpacity
-              key={item.idx}
+              key={item.Search_idx}
               onPress={() =>
                 navigation.navigate("Result", {
-                  pest: item.pest,
-                  acc: item.acc,
-                  image: item.image,
+                  pest: item.Pest,
+                  acc: item.Percentage,
+                  image: {
+                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                  },
                 })
               }
               style={{ padding: 10, height: 200, alignItems: "center" }}
             >
               <Image
-                source={item.image}
-                style={{ marginHorizontal: 10, width: 150, height: 150 }}
+                source={{
+                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                }}
+                style={{
+                  marginHorizontal: 10,
+                  width: 150,
+                  height: 150,
+                  borderRadius: 8,
+                }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.createdTime}
+                {item.Created_time}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.pest}
+                {item.Pest}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
                 margin: 5,
                 padding: 7,
-                width: 100,
+                width: 80,
                 alignItems: "center",
-                borderRadius: 16,
+                borderRadius: 8,
                 backgroundColor: "red",
               }}
+              onPress={removeResult.bind(this, item.Search_idx)}
             >
               <Text
                 style={{
                   textAlign: "center",
                   fontWeight: "bold",
-                  fontSize: 20,
+                  fontSize: 16,
+                  color: "white",
                 }}
               >
                 삭제
@@ -289,7 +337,7 @@ function WelshHis({ navigation }) {
             </TouchableOpacity>
           </View>
         )}
-        keyExtractor={(item) => item.idx}
+        keyExtractor={(item) => item.Search_idx}
         numColumns={2}
       />
     </View>
@@ -297,49 +345,101 @@ function WelshHis({ navigation }) {
 }
 
 function BeanHis({ navigation }) {
+  const authCtx = useContext(AuthContext);
+  const userEmail = authCtx.email;
+  const [result, setResult] = useState([]);
+  useEffect(() => {
+    getResult(userEmail);
+  }, []);
+  async function getResult(userEmail) {
+    await axios
+      .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
+      .catch((err) => console.log(err))
+      .then((res) => {
+        setResult(res.data);
+      });
+    console.log(result);
+    console.log(result.length);
+  }
+
+  function removeResult(toRemoveIdx) {
+    //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
+    console.log(toRemoveIdx);
+  }
   return (
     <View style={styles.container}>
+      {result.filter((item) => item.Plant_type === "bean").length === 0 ? (
+        <View
+          style={{
+            marginTop: 200,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text>검사내역이 없습니다.</Text>
+        </View>
+      ) : null}
       <FlatList
-        data={result.filter((item) => item.pest.includes("콩"))}
+        data={result.filter((item) => item.Plant_type === "bean")}
         renderItem={({ item }) => (
-          <View style={{ alignItems: "center", borderWidth: 2 }}>
+          <View
+            style={{
+              width: "47.5%",
+              margin: 5,
+              alignItems: "center",
+              borderRadius: 8,
+              backgroundColor: "white",
+            }}
+          >
             <TouchableOpacity
-              key={item.idx}
+              key={item.Search_idx}
               onPress={() =>
                 navigation.navigate("Result", {
-                  pest: item.pest,
-                  acc: item.acc,
-                  image: item.image,
+                  pest: item.Pest,
+                  acc: item.Percentage,
+                  image: {
+                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                  },
                 })
               }
               style={{ padding: 10, height: 200, alignItems: "center" }}
             >
               <Image
-                source={item.image}
-                style={{ marginHorizontal: 10, width: 150, height: 150 }}
+                source={{
+                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                }}
+                style={{
+                  marginHorizontal: 10,
+                  width: 150,
+                  height: 150,
+                  borderRadius: 8,
+                }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.createdTime}
+                {item.Created_time}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.pest}
+                {item.Pest}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
                 margin: 5,
                 padding: 7,
-                width: 100,
+                width: 80,
                 alignItems: "center",
-                borderRadius: 16,
+                borderRadius: 8,
                 backgroundColor: "red",
               }}
+              onPress={removeResult.bind(this, item.Search_idx)}
             >
               <Text
                 style={{
                   textAlign: "center",
                   fontWeight: "bold",
-                  fontSize: 20,
+                  fontSize: 16,
+                  color: "white",
                 }}
               >
                 삭제
@@ -347,7 +447,7 @@ function BeanHis({ navigation }) {
             </TouchableOpacity>
           </View>
         )}
-        keyExtractor={(item) => item.idx}
+        keyExtractor={(item) => item.Search_idx}
         numColumns={2}
       />
     </View>
@@ -355,49 +455,101 @@ function BeanHis({ navigation }) {
 }
 
 function RadishHis({ navigation }) {
+  const authCtx = useContext(AuthContext);
+  const userEmail = authCtx.email;
+  const [result, setResult] = useState([]);
+  useEffect(() => {
+    getResult(userEmail);
+  }, []);
+  async function getResult(userEmail) {
+    await axios
+      .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
+      .catch((err) => console.log(err))
+      .then((res) => {
+        setResult(res.data);
+      });
+    console.log(result);
+    console.log(result.length);
+  }
+
+  function removeResult(toRemoveIdx) {
+    //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
+    console.log(toRemoveIdx);
+  }
   return (
     <View style={styles.container}>
+      {result.filter((item) => item.Plant_type === "rad").length === 0 ? (
+        <View
+          style={{
+            marginTop: 200,
+            flex: 1,
+            justifyContent: "center",
+            alignItems: "center",
+          }}
+        >
+          <Text>검사내역이 없습니다.</Text>
+        </View>
+      ) : null}
       <FlatList
-        data={result.filter((item) => item.pest.includes("무"))}
+        data={result.filter((item) => item.Plant_type === "rad")}
         renderItem={({ item }) => (
-          <View style={{ alignItems: "center", borderWidth: 2 }}>
+          <View
+            style={{
+              width: "47.5%",
+              margin: 5,
+              alignItems: "center",
+              borderRadius: 8,
+              backgroundColor: "white",
+            }}
+          >
             <TouchableOpacity
-              key={item.idx}
+              key={item.Search_idx}
               onPress={() =>
                 navigation.navigate("Result", {
-                  pest: item.pest,
-                  acc: item.acc,
-                  image: item.image,
+                  pest: item.Pest,
+                  acc: item.Percentage,
+                  image: {
+                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                  },
                 })
               }
               style={{ padding: 10, height: 200, alignItems: "center" }}
             >
               <Image
-                source={item.image}
-                style={{ marginHorizontal: 10, width: 150, height: 150 }}
+                source={{
+                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                }}
+                style={{
+                  marginHorizontal: 10,
+                  width: 150,
+                  height: 150,
+                  borderRadius: 8,
+                }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.createdTime}
+                {item.Created_time}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.pest}
+                {item.Pest}
               </Text>
             </TouchableOpacity>
             <TouchableOpacity
               style={{
                 margin: 5,
                 padding: 7,
-                width: 100,
+                width: 80,
                 alignItems: "center",
-                borderRadius: 16,
+                borderRadius: 8,
                 backgroundColor: "red",
               }}
+              onPress={removeResult.bind(this, item.Search_idx)}
             >
               <Text
                 style={{
                   textAlign: "center",
                   fontWeight: "bold",
-                  fontSize: 20,
+                  fontSize: 16,
+                  color: "white",
                 }}
               >
                 삭제
@@ -405,7 +557,7 @@ function RadishHis({ navigation }) {
             </TouchableOpacity>
           </View>
         )}
-        keyExtractor={(item) => item.idx}
+        keyExtractor={(item) => item.Search_idx}
         numColumns={2}
       />
     </View>
@@ -413,12 +565,6 @@ function RadishHis({ navigation }) {
 }
 
 function History() {
-  const authCtx = useContext(AuthContext);
-  const userEmail = authCtx.email; // 사용자에따라 다른 데이터 로드를 위함. 아래 함수들에서 사용
-  useEffect(() => {
-    //getResult(userEmail);
-  }, []); //처음에 화면이 렌더링 될 때 실행되고 그 이후에는 삭제시에만 실행됨
-
   return (
     <Tab.Navigator
       initialRouteName="All"
@@ -429,7 +575,7 @@ function History() {
         tabBarActiveBackgroundColor: "lightgreen",
       }}
     >
-      <Tab.Screen
+      {/* <Tab.Screen
         name="All"
         component={AllHis}
         options={{
@@ -443,7 +589,7 @@ function History() {
             />
           ),
         }}
-      />
+      /> */}
       <Tab.Screen
         name="Pepper"
         component={PepperHis}
@@ -526,6 +672,7 @@ function History() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
+    backgroundColor: "#BDC3C7",
   },
 });
 

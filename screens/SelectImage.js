@@ -20,7 +20,6 @@ function SelectImage({ route, navigation }) {
   }
   const authCtx = useContext(AuthContext);
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
-  //const plantId = route.params.plantId;
   async function getResult() {
     const localUri = image.uri;
     const filename = localUri.split("/").pop();
