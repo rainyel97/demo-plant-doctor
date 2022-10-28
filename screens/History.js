@@ -27,9 +27,10 @@ function PepperHis({ navigation }) {
       .catch((err) => console.log(err))
       .then((res) => {
         setResult(res.data);
+
+        console.log(result);
+        console.log(result.length);
       });
-    console.log(result);
-    console.log(result.length);
   }
 
   function removeResult(toRemoveIdx) {
@@ -38,7 +39,8 @@ function PepperHis({ navigation }) {
   }
   return (
     <View style={styles.container}>
-      {result.filter((item) => item.Plant_type === "pep").length === 0 ? (
+      {result.filter((item) => item.Plant_type === "pep").length === 0 ||
+      result === undefined ? (
         <View
           style={{
             marginTop: 200,
@@ -89,7 +91,8 @@ function PepperHis({ navigation }) {
                 }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.Created_time}
+                {item.Created_time.split("T")[0]}{" "}
+                {item.Created_time.split("T")[1].split(".")[0]}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
                 {item.Pest}
@@ -150,7 +153,8 @@ function CabbageHis({ navigation }) {
   }
   return (
     <View style={styles.container}>
-      {result.filter((item) => item.Plant_type === "cab").length === 0 ? (
+      {result.filter((item) => item.Plant_type === "cab").length === 0 ||
+      result === undefined ? (
         <View
           style={{
             marginTop: 200,
@@ -201,7 +205,8 @@ function CabbageHis({ navigation }) {
                 }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.Created_time}
+                {item.Created_time.split("T")[0]}{" "}
+                {item.Created_time.split("T")[1].split(".")[0]}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
                 {item.Pest}
@@ -262,7 +267,8 @@ function WelshHis({ navigation }) {
   }
   return (
     <View style={styles.container}>
-      {result.filter((item) => item.Plant_type === "wel").length === 0 ? (
+      {result.filter((item) => item.Plant_type === "wel").length === 0 ||
+      result === undefined ? (
         <View
           style={{
             marginTop: 200,
@@ -313,7 +319,8 @@ function WelshHis({ navigation }) {
                 }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.Created_time}
+                {item.Created_time.split("T")[0]}{" "}
+                {item.Created_time.split("T")[1].split(".")[0]}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
                 {item.Pest}
@@ -374,7 +381,8 @@ function BeanHis({ navigation }) {
   }
   return (
     <View style={styles.container}>
-      {result.filter((item) => item.Plant_type === "bean").length === 0 ? (
+      {result.filter((item) => item.Plant_type === "bean").length === 0 ||
+      result === undefined ? (
         <View
           style={{
             marginTop: 200,
@@ -425,7 +433,8 @@ function BeanHis({ navigation }) {
                 }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.Created_time}
+                {item.Created_time.split("T")[0]}{" "}
+                {item.Created_time.split("T")[1].split(".")[0]}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
                 {item.Pest}
@@ -486,7 +495,8 @@ function RadishHis({ navigation }) {
   }
   return (
     <View style={styles.container}>
-      {result.filter((item) => item.Plant_type === "rad").length === 0 ? (
+      {result.filter((item) => item.Plant_type === "rad").length === 0 ||
+      result === undefined ? (
         <View
           style={{
             marginTop: 200,
@@ -537,7 +547,8 @@ function RadishHis({ navigation }) {
                 }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.Created_time}
+                {item.Created_time.split("T")[0]}{" "}
+                {item.Created_time.split("T")[1].split(".")[0]}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
                 {item.Pest}
