@@ -590,7 +590,7 @@ function History() {
     <Tab.Navigator
       initialRouteName="All"
       screenOptions={{
-        tabBarStyle: { height: 70 },
+        tabBarStyle: { height: Platform.OS === "android" ? 70 : 100 },
         tabBarLabelStyle: { color: "black", fontSize: 17 },
         tabBarActiveTinitColor: "black",
         tabBarActiveBackgroundColor: "lightgreen",
