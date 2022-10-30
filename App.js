@@ -1,6 +1,6 @@
 import { useContext } from "react";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet, View } from "react-native";
+import { StyleSheet, SafeAreaView } from "react-native";
 import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 //components
@@ -124,12 +124,12 @@ function Navigation() {
 
 export default function App() {
   return (
-    <View style={styles.container}>
+    <SafeAreaView style={styles.container}>
       <StatusBar style="auto" />
       <AuthContextProvider>
         <Navigation />
       </AuthContextProvider>
-    </View>
+    </SafeAreaView>
   );
 }
 
