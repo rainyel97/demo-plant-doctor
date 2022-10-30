@@ -1,3 +1,4 @@
+import { useNavigation } from "@react-navigation/native";
 import { useContext, useState } from "react";
 import { View, StyleSheet, Alert } from "react-native";
 import AuthContent from "../components/Auth/AuthContent";
@@ -8,19 +9,26 @@ function Register() {
   const [isAuthenticating, setIsAuthenticating] = useState(false);
 
   const authCtx = useContext(AuthContext);
-
+  const navigation = useNavigation();
   async function signupHandler({ email, password }) {
-    //setIsAuthenticating(true);
+    setIsAuthenticating(true);
     try {
-      const token = await createUser(email, password);
-      authCtx.authenticate(token);
-      Alert.alert("회원가입에 성공하였습니다!", "자동으로 로그인되었습니다.");
+      await createUser(email, password);
+      //authCtx.authenticate(token);
+      Alert.alert("회원가입에 성공하였습니다!", "", [
+        {
+          Text: "로그인하러가기",
+          onPress: () => {
+            navigation.navigate("Login");
+          },
+        },
+      ]);
     } catch (error) {
       Alert.alert(
         "가입에 실패하였습니다!",
         "이미 가입된 이메일이거나 이메일이 유효하지 않습니다."
       );
-      //setIsAuthenticating(false);
+      setIsAuthenticating(false);
     }
   }
 

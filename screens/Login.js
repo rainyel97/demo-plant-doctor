@@ -10,7 +10,7 @@ function Login() {
   const authCtx = useContext(AuthContext);
 
   async function LoginHandler({ email, password }) {
-    //setIsAuthenticating(true);
+    setIsAuthenticating(true);
     try {
       const token = await login(email, password);
       authCtx.authenticate(token);
@@ -20,7 +20,7 @@ function Login() {
         "로그인에 실패하였습니다!",
         "등록되지 않은 정보이거나 비밀번호가 일치하지 않습니다."
       );
-      //setIsAuthenticating(false);
+      setIsAuthenticating(false);
     }
   }
 
