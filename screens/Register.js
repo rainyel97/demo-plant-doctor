@@ -14,6 +14,7 @@ function Register() {
     try {
       const token = await createUser(email, password);
       authCtx.authenticate(token);
+      Alert.alert("회원가입에 성공하였습니다!", "자동으로 로그인되었습니다.");
     } catch (error) {
       Alert.alert(
         "가입에 실패하였습니다!",
