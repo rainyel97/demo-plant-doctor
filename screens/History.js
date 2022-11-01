@@ -33,9 +33,13 @@ function PepperHis({ navigation }) {
       });
   }
 
-  function removeResult(toRemoveIdx) {
+  async function removeResult(toRemoveIdx) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
-    console.log(toRemoveIdx);
+    await axios.delete(
+      `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+    );
+    //console.log(toRemoveIdx);
+    getResult(userEmail);
   }
   return (
     <View style={styles.container}>
@@ -147,9 +151,13 @@ function CabbageHis({ navigation }) {
     console.log(result.length);
   }
 
-  function removeResult(toRemoveIdx) {
+  async function removeResult(toRemoveIdx) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
-    console.log(toRemoveIdx);
+    await axios.delete(
+      `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+    );
+    //console.log(toRemoveIdx);
+    getResult(userEmail);
   }
   return (
     <View style={styles.container}>
@@ -261,9 +269,13 @@ function WelshHis({ navigation }) {
     console.log(result.length);
   }
 
-  function removeResult(toRemoveIdx) {
+  async function removeResult(toRemoveIdx) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
-    console.log(toRemoveIdx);
+    await axios.delete(
+      `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+    );
+    //console.log(toRemoveIdx);
+    getResult(userEmail);
   }
   return (
     <View style={styles.container}>
@@ -375,9 +387,13 @@ function BeanHis({ navigation }) {
     console.log(result.length);
   }
 
-  function removeResult(toRemoveIdx) {
+  async function removeResult(toRemoveIdx) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
-    console.log(toRemoveIdx);
+    await axios.delete(
+      `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+    );
+    //console.log(toRemoveIdx);
+    getResult(userEmail);
   }
   return (
     <View style={styles.container}>
@@ -489,9 +505,13 @@ function RadishHis({ navigation }) {
     console.log(result.length);
   }
 
-  function removeResult(toRemoveIdx) {
+  async function removeResult(toRemoveIdx) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
-    console.log(toRemoveIdx);
+    await axios.delete(
+      `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+    );
+    //console.log(toRemoveIdx);
+    getResult(userEmail);
   }
   return (
     <View style={styles.container}>
