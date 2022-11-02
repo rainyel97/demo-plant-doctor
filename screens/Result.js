@@ -38,7 +38,7 @@ function Result({ route, navigation }) {
           </Text>
           <Text style={styles.resultText}>
             <Text style={{ color: "red", fontSize: 24 }}>{pest}</Text>
-            (으)로 판별되었습니다!
+            으로 판별되었습니다!
           </Text>
         </View>
         <View style={{ flexDirection: "row" }}>
