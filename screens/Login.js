@@ -34,6 +34,9 @@ function Login() {
         style={styles.newLogo}
       />
       <AuthContent isLogin onAuthenticate={LoginHandler} />
+      <Text style={{ fontSize: 8, marginTop: 4 }}>
+        All Icons in this APP from Flaticon.com
+      </Text>
     </View>
   );
 }
