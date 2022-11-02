@@ -183,7 +183,7 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.25,
     shadowOffset: { width: 0, height: 2 },
     shadowRadius: 8,
-    overflow: Platform.OS === "android" ? "hidden" : "visible",
+    //overflow: Platform.OS === "android" ? "hidden" : "visible",
   },
   centeredView: {
     flex: 1,
@@ -210,10 +210,9 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    //backgroundColor: "green",
     borderRadius: 15,
     padding: 10,
-    elevation: 2,
+    //elevation: 2,
   },
   textStyle: {
     fontWeight: "bold",
