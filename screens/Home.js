@@ -53,7 +53,7 @@ function Home({ navigation }) {
       style={styles.back}
     >
       <Modal
-        animationType="slide"
+        animationType="fade"
         transparent={true}
         visible={modalVisible}
         onRequestClose={() => {
@@ -63,20 +63,41 @@ function Home({ navigation }) {
         <View style={styles.centeredView}>
           <View style={styles.modalView}>
             <Text style={styles.modalText}>
-              월간 병해충 발생 정보가 10월로 업데이트 되었습니다!
+              월간 병해충 발생 정보가 업데이트 되었습니다!
             </Text>
             <Text style={[styles.modalText, { color: "blue" }]}>
               최신정보를 확인하실 것을 권장합니다.
             </Text>
-            <Pressable
-              style={({ pressed }) => [
-                styles.button,
-                pressed && styles.pressed,
-              ]}
-              onPress={memoryClick}
+            <View
+              style={{
+                flexDirection: "row",
+                width: 200,
+                justifyContent: "space-between",
+              }}
             >
-              <Text style={styles.textStyle}>다시 열지 않기</Text>
-            </Pressable>
+              <Pressable
+                style={({ pressed }) => [
+                  styles.button,
+                  pressed && styles.pressed,
+                ]}
+                onPress={() => {
+                  setModalVisible(!modalVisible);
+                }}
+              >
+                <Text style={[styles.textStyle, { color: "green" }]}>확인</Text>
+              </Pressable>
+              <Pressable
+                style={({ pressed }) => [
+                  styles.button,
+                  pressed && styles.pressed,
+                ]}
+                onPress={memoryClick}
+              >
+                <Text style={[styles.textStyle, { color: "red" }]}>
+                  다시 열지 않기
+                </Text>
+              </Pressable>
+            </View>
           </View>
         </View>
       </Modal>
@@ -169,12 +190,14 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     backgroundColor: "rgba(0, 0, 0, 0.4)",
-    marginTop: 22,
+    //marginTop: 22,
   },
   modalView: {
+    height: 150,
+    justifyContent: "space-between",
     margin: 20,
     backgroundColor: "white",
-    borderRadius: 1,
+    borderRadius: 10,
     padding: 20,
     alignItems: "center",
     shadowColor: "#000",
@@ -187,13 +210,12 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   button: {
-    backgroundColor: "green",
+    //backgroundColor: "green",
     borderRadius: 15,
     padding: 10,
     elevation: 2,
   },
   textStyle: {
-    color: "white",
     fontWeight: "bold",
     textAlign: "center",
   },
