@@ -5,6 +5,7 @@ import {
   StyleSheet,
   FlatList,
   TouchableOpacity,
+  Alert,
 } from "react-native";
 import { useEffect, useContext, useState } from "react";
 import { AuthContext } from "../store/auth-context";
@@ -35,9 +36,13 @@ function PepperHis({ navigation }) {
 
   async function removeResult(toRemoveIdx) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
-    await axios.delete(
-      `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
-    );
+    await axios
+      .delete(
+        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+      )
+      .then(() => {
+        Alert.alert("내역이 삭제되었습니다");
+      });
     //console.log(toRemoveIdx);
     getResult(userEmail);
   }
@@ -111,7 +116,16 @@ function PepperHis({ navigation }) {
                 borderRadius: 8,
                 backgroundColor: "red",
               }}
-              onPress={removeResult.bind(this, item.Search_idx)}
+              onPress={() => {
+                Alert.alert("정말 삭제하시겠습니까?", "", [
+                  {
+                    text: "예",
+                    onPress: removeResult.bind(this, item.Search_idx),
+                  },
+                  { text: "아니오", style: "cancel" },
+                ]);
+              }}
+              //removeResult.bind(this, item.Search_idx)}
             >
               <Text
                 style={{
@@ -153,9 +167,13 @@ function CabbageHis({ navigation }) {
 
   async function removeResult(toRemoveIdx) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
-    await axios.delete(
-      `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
-    );
+    await axios
+      .delete(
+        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+      )
+      .then(() => {
+        Alert.alert("내역이 삭제되었습니다");
+      });
     //console.log(toRemoveIdx);
     getResult(userEmail);
   }
@@ -229,7 +247,15 @@ function CabbageHis({ navigation }) {
                 borderRadius: 8,
                 backgroundColor: "red",
               }}
-              onPress={removeResult.bind(this, item.Search_idx)}
+              onPress={() => {
+                Alert.alert("정말 삭제하시겠습니까?", "", [
+                  {
+                    text: "예",
+                    onPress: removeResult.bind(this, item.Search_idx),
+                  },
+                  { text: "아니오", style: "cancel" },
+                ]);
+              }}
             >
               <Text
                 style={{
@@ -271,9 +297,13 @@ function WelshHis({ navigation }) {
 
   async function removeResult(toRemoveIdx) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
-    await axios.delete(
-      `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
-    );
+    await axios
+      .delete(
+        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+      )
+      .then(() => {
+        Alert.alert("내역이 삭제되었습니다");
+      });
     //console.log(toRemoveIdx);
     getResult(userEmail);
   }
@@ -347,7 +377,15 @@ function WelshHis({ navigation }) {
                 borderRadius: 8,
                 backgroundColor: "red",
               }}
-              onPress={removeResult.bind(this, item.Search_idx)}
+              onPress={() => {
+                Alert.alert("정말 삭제하시겠습니까?", "", [
+                  {
+                    text: "예",
+                    onPress: removeResult.bind(this, item.Search_idx),
+                  },
+                  { text: "아니오", style: "cancel" },
+                ]);
+              }}
             >
               <Text
                 style={{
@@ -389,9 +427,13 @@ function BeanHis({ navigation }) {
 
   async function removeResult(toRemoveIdx) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
-    await axios.delete(
-      `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
-    );
+    await axios
+      .delete(
+        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+      )
+      .then(() => {
+        Alert.alert("내역이 삭제되었습니다");
+      });
     //console.log(toRemoveIdx);
     getResult(userEmail);
   }
@@ -465,7 +507,15 @@ function BeanHis({ navigation }) {
                 borderRadius: 8,
                 backgroundColor: "red",
               }}
-              onPress={removeResult.bind(this, item.Search_idx)}
+              onPress={() => {
+                Alert.alert("정말 삭제하시겠습니까?", "", [
+                  {
+                    text: "예",
+                    onPress: removeResult.bind(this, item.Search_idx),
+                  },
+                  { text: "아니오", style: "cancel" },
+                ]);
+              }}
             >
               <Text
                 style={{
@@ -507,9 +557,13 @@ function RadishHis({ navigation }) {
 
   async function removeResult(toRemoveIdx) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
-    await axios.delete(
-      `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
-    );
+    await axios
+      .delete(
+        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+      )
+      .then(() => {
+        Alert.alert("내역이 삭제되었습니다");
+      });
     //console.log(toRemoveIdx);
     getResult(userEmail);
   }
@@ -583,7 +637,15 @@ function RadishHis({ navigation }) {
                 borderRadius: 8,
                 backgroundColor: "red",
               }}
-              onPress={removeResult.bind(this, item.Search_idx)}
+              onPress={() => {
+                Alert.alert("정말 삭제하시겠습니까?", "", [
+                  {
+                    text: "예",
+                    onPress: removeResult.bind(this, item.Search_idx),
+                  },
+                  { text: "아니오", style: "cancel" },
+                ]);
+              }}
             >
               <Text
                 style={{
