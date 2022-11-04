@@ -20,6 +20,7 @@ import iconLogout from "../assets/logout.png";
 function Home({ navigation }) {
   const [modalVisible, setModalVisible] = useState(false);
   //AsyncStorage.setItem("memory", "false");
+  //병충해 정보가 업데이트 될 때마 기억변수의 이름을 바꾸어주면 팝업이 자동으로뜨게됨.
   useEffect(() => {
     AsyncStorage.getItem("memory", (err, result) => {
       if (result === "true") setModalVisible(false);
