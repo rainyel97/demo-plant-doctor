@@ -59,7 +59,8 @@ function SelectImage({ route, navigation }) {
   async function verifyPermissions() {
     if (
       cameraPermissionInformation.status ===
-      ImagePicker.PermissionStatus.UNDETERMINED
+        ImagePicker.PermissionStatus.UNDETERMINED ||
+      cameraPermissionInformation.status === ImagePicker.PermissionStatus.DENIED
     ) {
       const permissionResponse = await requestPermission();
 
@@ -73,6 +74,7 @@ function SelectImage({ route, navigation }) {
         "요청이 거부되었습니다!",
         "기능을 사용하기 위해 카메라 권한이 필요합니다."
       );
+      console.log(cameraPermissionInformation);
       return false;
     }
 
