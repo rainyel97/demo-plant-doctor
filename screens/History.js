@@ -12,7 +12,6 @@ import { AuthContext } from "../store/auth-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import axios from "axios";
 const Tab = createBottomTabNavigator();
-
 //네비게이션을 이용해 작물별로 구현
 
 function PepperHis({ navigation }) {
@@ -25,7 +24,9 @@ function PepperHis({ navigation }) {
   async function getResult(userEmail) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        Alert.alert("서버와의 통신에 실패했습니다.", "");
+      })
       .then((res) => {
         setResult(res.data);
 
@@ -40,6 +41,9 @@ function PepperHis({ navigation }) {
       .delete(
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
+      .catch((err) => {
+        Alert.alert("서버와의 통신에 실패했습니다.", "");
+      })
       .then(() => {
         Alert.alert("내역이 삭제되었습니다");
       });
@@ -100,8 +104,7 @@ function PepperHis({ navigation }) {
                 }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.Created_time.split("T")[0]}{" "}
-                {item.Created_time.split("T")[1].split(".")[0]}
+                {item.Created_time}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
                 {item.Pest}
@@ -231,8 +234,7 @@ function CabbageHis({ navigation }) {
                 }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.Created_time.split("T")[0]}{" "}
-                {item.Created_time.split("T")[1].split(".")[0]}
+                {item.Created_time}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
                 {item.Pest}
@@ -361,8 +363,7 @@ function WelshHis({ navigation }) {
                 }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.Created_time.split("T")[0]}{" "}
-                {item.Created_time.split("T")[1].split(".")[0]}
+                {item.Created_time}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
                 {item.Pest}
@@ -491,8 +492,7 @@ function BeanHis({ navigation }) {
                 }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.Created_time.split("T")[0]}{" "}
-                {item.Created_time.split("T")[1].split(".")[0]}
+                {item.Created_time}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
                 {item.Pest}
@@ -621,8 +621,7 @@ function RadishHis({ navigation }) {
                 }}
               />
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
-                {item.Created_time.split("T")[0]}{" "}
-                {item.Created_time.split("T")[1].split(".")[0]}
+                {item.Created_time}
               </Text>
               <Text style={{ padding: 2, fontSize: 13, fontWeight: "bold" }}>
                 {item.Pest}

@@ -34,6 +34,8 @@ function SelectImage({ route, navigation }) {
         "content-type": "multipart/form-data",
       },
       data: formData,
+    }).catch((err) => {
+      Alert.alert("서버와의 통신에 실패하였습니다.", "");
     });
     //결과 받아오는 api 작성할 부분
     const acc = 99; //이 부분에 각각 결과값을 대입해주어야함
