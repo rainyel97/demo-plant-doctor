@@ -3,8 +3,10 @@ import { Pressable, View, Text, StyleSheet, Image, Alert } from "react-native";
 import * as ImagePicker from "expo-image-picker";
 import { AuthContext } from "../store/auth-context";
 import axios from "axios";
+import LoadingOverlay from "../components/LoadingOverlay";
 function SelectImage({ route, navigation }) {
   let plantName;
+  const [isAuthenticating, setIsAuthenticating] = useState(false);
   const [image, setImage] = useState(null);
   const selectedPlant = route.params.plantId;
   if (selectedPlant === "고추") {
@@ -21,6 +23,7 @@ function SelectImage({ route, navigation }) {
   const authCtx = useContext(AuthContext);
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
   async function getResult() {
+    setIsAuthenticating(true);
     const localUri = image.uri;
     const filename = localUri.split("/").pop();
     const match = /\.(\w+)$/.exec(filename ?? "");
@@ -37,7 +40,9 @@ function SelectImage({ route, navigation }) {
     }).catch((err) => {
       Alert.alert("서버와의 통신에 실패하였습니다.", "");
     });
+
     //결과 받아오는 api 작성할 부분
+
     const acc = 99; //이 부분에 각각 결과값을 대입해주어야함
     const pest = "고추탄저병"; //동일
     console.log(localUri);
@@ -45,11 +50,13 @@ function SelectImage({ route, navigation }) {
     console.log(type);
     //병충해가 없는 이미지일 경우 unfinded로 받아오기
     if (pest === "unfinded") {
+      setIsAuthenticating(false);
       Alert.alert(
         "병충해가 발견되지 않았습니다.",
         "이미지를 다시 확인해주세요."
       );
     } else {
+      setIsAuthenticating(false);
       navigation.navigate("Result", { image: image, acc: acc, pest: pest }); //이때 정확도랑 병명까지 넘겨줘야함
     }
   }
@@ -117,6 +124,9 @@ function SelectImage({ route, navigation }) {
     if (!result.cancelled) {
       setImage(result);
     }
+  }
+  if (isAuthenticating) {
+    return <LoadingOverlay message="이미지를 검사중입니다..." />;
   }
   return (
     <View style={styles.container}>
