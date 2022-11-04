@@ -160,7 +160,9 @@ function CabbageHis({ navigation }) {
   async function getResult(userEmail) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        Alert.alert("서버와의 통신에 실패했습니다.", "");
+      })
       .then((res) => {
         setResult(res.data);
       });
@@ -174,6 +176,9 @@ function CabbageHis({ navigation }) {
       .delete(
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
+      .catch((err) => {
+        Alert.alert("서버와의 통신에 실패했습니다.", "");
+      })
       .then(() => {
         Alert.alert("내역이 삭제되었습니다");
       });
@@ -289,7 +294,9 @@ function WelshHis({ navigation }) {
   async function getResult(userEmail) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        Alert.alert("서버와의 통신에 실패했습니다.", "");
+      })
       .then((res) => {
         setResult(res.data);
       });
@@ -303,6 +310,9 @@ function WelshHis({ navigation }) {
       .delete(
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
+      .catch((err) => {
+        Alert.alert("서버와의 통신에 실패했습니다.", "");
+      })
       .then(() => {
         Alert.alert("내역이 삭제되었습니다");
       });
@@ -418,7 +428,9 @@ function BeanHis({ navigation }) {
   async function getResult(userEmail) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        Alert.alert("서버와의 통신에 실패했습니다.", "");
+      })
       .then((res) => {
         setResult(res.data);
       });
@@ -432,6 +444,9 @@ function BeanHis({ navigation }) {
       .delete(
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
+      .catch((err) => {
+        Alert.alert("서버와의 통신에 실패했습니다.", "");
+      })
       .then(() => {
         Alert.alert("내역이 삭제되었습니다");
       });
@@ -547,7 +562,9 @@ function RadishHis({ navigation }) {
   async function getResult(userEmail) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
-      .catch((err) => console.log(err))
+      .catch((err) => {
+        Alert.alert("서버와의 통신에 실패했습니다.", "");
+      })
       .then((res) => {
         setResult(res.data);
       });
@@ -561,6 +578,9 @@ function RadishHis({ navigation }) {
       .delete(
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
+      .catch((err) => {
+        Alert.alert("서버와의 통신에 실패했습니다.", "");
+      })
       .then(() => {
         Alert.alert("내역이 삭제되었습니다");
       });

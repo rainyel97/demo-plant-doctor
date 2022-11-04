@@ -39,11 +39,19 @@ function SelectImage({ route, navigation }) {
     });
     //결과 받아오는 api 작성할 부분
     const acc = 99; //이 부분에 각각 결과값을 대입해주어야함
-    const pest = "무검은무늬병"; //동일
+    const pest = "고추탄저병"; //동일
     console.log(localUri);
     console.log(filename);
     console.log(type);
-    navigation.navigate("Result", { image: image, acc: acc, pest: pest }); //이때 정확도랑 병명까지 넘겨줘야함
+    //병충해가 없는 이미지일 경우 unfinded로 받아오기
+    if (pest === "unfinded") {
+      Alert.alert(
+        "병충해가 발견되지 않았습니다.",
+        "이미지를 다시 확인해주세요."
+      );
+    } else {
+      navigation.navigate("Result", { image: image, acc: acc, pest: pest }); //이때 정확도랑 병명까지 넘겨줘야함
+    }
   }
   const [cameraPermissionInformation, requestPermission] =
     ImagePicker.useCameraPermissions();
