@@ -25,7 +25,7 @@ function PepperHis({ navigation }) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
       .catch((err) => {
-        Alert.alert("서버와의 통신에 실패했습니다.", "");
+        Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then((res) => {
         setResult(res.data);
@@ -42,7 +42,7 @@ function PepperHis({ navigation }) {
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
       .catch((err) => {
-        Alert.alert("서버와의 통신에 실패했습니다.", "");
+        Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then(() => {
         Alert.alert("내역이 삭제되었습니다");
@@ -161,7 +161,7 @@ function CabbageHis({ navigation }) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
       .catch((err) => {
-        Alert.alert("서버와의 통신에 실패했습니다.", "");
+        Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then((res) => {
         setResult(res.data);
@@ -177,7 +177,7 @@ function CabbageHis({ navigation }) {
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
       .catch((err) => {
-        Alert.alert("서버와의 통신에 실패했습니다.", "");
+        Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then(() => {
         Alert.alert("내역이 삭제되었습니다");
@@ -295,7 +295,7 @@ function WelshHis({ navigation }) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
       .catch((err) => {
-        Alert.alert("서버와의 통신에 실패했습니다.", "");
+        Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then((res) => {
         setResult(res.data);
@@ -311,7 +311,7 @@ function WelshHis({ navigation }) {
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
       .catch((err) => {
-        Alert.alert("서버와의 통신에 실패했습니다.", "");
+        Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then(() => {
         Alert.alert("내역이 삭제되었습니다");
@@ -429,7 +429,7 @@ function BeanHis({ navigation }) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
       .catch((err) => {
-        Alert.alert("서버와의 통신에 실패했습니다.", "");
+        Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then((res) => {
         setResult(res.data);
@@ -445,7 +445,7 @@ function BeanHis({ navigation }) {
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
       .catch((err) => {
-        Alert.alert("서버와의 통신에 실패했습니다.", "");
+        Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then(() => {
         Alert.alert("내역이 삭제되었습니다");
@@ -563,7 +563,7 @@ function RadishHis({ navigation }) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
       .catch((err) => {
-        Alert.alert("서버와의 통신에 실패했습니다.", "");
+        Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then((res) => {
         setResult(res.data);
@@ -579,7 +579,7 @@ function RadishHis({ navigation }) {
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
       .catch((err) => {
-        Alert.alert("서버와의 통신에 실패했습니다.", "");
+        Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then(() => {
         Alert.alert("내역이 삭제되었습니다");

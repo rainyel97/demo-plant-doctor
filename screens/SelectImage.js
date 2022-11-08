@@ -38,7 +38,7 @@ function SelectImage({ route, navigation }) {
       },
       data: formData,
     }).catch((err) => {
-      Alert.alert("서버와의 통신에 실패하였습니다.", "");
+      Alert.alert("서버와의 통신에 실패하였습니다.", err);
     });
 
     //결과 받아오는 api 작성할 부분
