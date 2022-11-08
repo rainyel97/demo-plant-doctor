@@ -42,7 +42,7 @@ function SelectImage({ route, navigation }) {
     });
 
     //결과 받아오는 api 작성할 부분
-
+    //if문(혹은 스위치문)사용해서 병 코드랑 작물 이름에따른 병명을 pest에 대입시켜줘야함
     const acc = 99; //이 부분에 각각 결과값을 대입해주어야함
     const pest = "고추탄저병"; //동일
     console.log(localUri);
