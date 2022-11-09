@@ -54,11 +54,17 @@ function SelectImage({ route, navigation }) {
     //console.log(localUri);
     //console.log(filename);
     //console.log(type);
-    if (pest === "정상") {
+    if (pest === "검사불가") {
       setIsAuthenticating(false);
       Alert.alert(
-        "병충해가 발견되지 않았습니다.",
+        "올바르지 않은 이미지 입니다.",
         "이미지를 다시 확인해주세요."
+      );
+    } else if (pest === "정상") {
+      setIsAuthenticating(false);
+      Alert.alert(
+        "해당 이미지 검사결과 정상으로 판별되었습니다.",
+        "아무 병충해가 발견되지 않았습니다."
       );
     } else {
       setIsAuthenticating(false);
