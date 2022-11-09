@@ -6,7 +6,7 @@ import axios from "axios";
 import LoadingOverlay from "../components/LoadingOverlay";
 function SelectImage({ route, navigation }) {
   let plantName;
-  const [isAuthenticating, setIsAuthenticating] = useState(false);
+  const [isExamining, setIsExamining] = useState(false);
   const [image, setImage] = useState(null);
   const selectedPlant = route.params.plantId;
   if (selectedPlant === "고추") {
@@ -23,7 +23,7 @@ function SelectImage({ route, navigation }) {
   const authCtx = useContext(AuthContext);
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
   async function getResult() {
-    setIsAuthenticating(true);
+    setIsExamining(true);
     let pest;
     let acc;
     let arr = [];
@@ -55,19 +55,19 @@ function SelectImage({ route, navigation }) {
     //console.log(filename);
     //console.log(type);
     if (pest === "검사불가") {
-      setIsAuthenticating(false);
+      setIsExamining(false);
       Alert.alert(
         "올바르지 않은 이미지 입니다.",
         "이미지를 다시 확인해주세요."
       );
     } else if (pest === "정상") {
-      setIsAuthenticating(false);
+      setIsExamining(false);
       Alert.alert(
         "해당 이미지 검사결과 정상으로 판별되었습니다.",
         "아무 병충해가 발견되지 않았습니다."
       );
     } else {
-      setIsAuthenticating(false);
+      setIsExamining(false);
       navigation.navigate("Result", {
         image: {
           uri: `http://3.38.14.197:3001/api/images/${arr[0]}`,
@@ -142,7 +142,7 @@ function SelectImage({ route, navigation }) {
       setImage(result);
     }
   }
-  if (isAuthenticating) {
+  if (isExamining) {
     return <LoadingOverlay message="이미지를 검사중입니다..." />;
   }
   return (
