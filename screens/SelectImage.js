@@ -112,7 +112,7 @@ function SelectImage({ route, navigation }) {
     }
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
-      aspect: [3, 4],
+      aspect: [4, 4],
       quality: 1,
     });
 
@@ -132,7 +132,7 @@ function SelectImage({ route, navigation }) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [3, 4],
+      aspect: [4, 4],
       quality: 1,
     });
 
