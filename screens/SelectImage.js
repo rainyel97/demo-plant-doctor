@@ -24,6 +24,9 @@ function SelectImage({ route, navigation }) {
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
   async function getResult() {
     setIsAuthenticating(true);
+    let pest;
+    let acc;
+    let arr = [];
     const localUri = image.uri;
     const filename = localUri.split("/").pop();
     const match = /\.(\w+)$/.exec(filename ?? "");
@@ -37,19 +40,21 @@ function SelectImage({ route, navigation }) {
         "content-type": "multipart/form-data",
       },
       data: formData,
-    }).catch((err) => {
-      Alert.alert("서버와의 통신에 실패하였습니다.", err);
-    });
+    })
+      .catch((err) => {
+        Alert.alert("서버와의 통신에 실패하였습니다.", err);
+      })
+      .then((res) => {
+        console.log(res.data);
+        arr = res.data.split(" ");
+        acc = arr[2];
+        pest = arr[1];
+      });
 
-    //결과 받아오는 api 작성할 부분
-    //if문(혹은 스위치문)사용해서 병 코드랑 작물 이름에따른 병명을 pest에 대입시켜줘야함
-    const acc = 99; //이 부분에 각각 결과값을 대입해주어야함
-    const pest = "고추탄저병"; //동일
-    console.log(localUri);
-    console.log(filename);
-    console.log(type);
-    //병충해가 없는 이미지일 경우 unfinded로 받아오기
-    if (pest === "unfinded") {
+    //console.log(localUri);
+    //console.log(filename);
+    //console.log(type);
+    if (pest === "정상") {
       setIsAuthenticating(false);
       Alert.alert(
         "병충해가 발견되지 않았습니다.",
@@ -57,7 +62,13 @@ function SelectImage({ route, navigation }) {
       );
     } else {
       setIsAuthenticating(false);
-      navigation.navigate("Result", { image: image, acc: acc, pest: pest }); //이때 정확도랑 병명까지 넘겨줘야함
+      navigation.navigate("Result", {
+        image: {
+          uri: `http://3.38.14.197:3001/api/images/${arr[0]}`,
+        },
+        acc: acc,
+        pest: pest,
+      });
     }
   }
   const [cameraPermissionInformation, requestPermission] =
@@ -95,11 +106,11 @@ function SelectImage({ route, navigation }) {
     }
     let result = await ImagePicker.launchCameraAsync({
       allowsEditing: true,
-      aspect: [4, 4],
+      aspect: [3, 4],
       quality: 1,
     });
 
-    console.log(result);
+    //console.log(result);
 
     if (!result.cancelled) {
       setImage(result);
@@ -115,11 +126,11 @@ function SelectImage({ route, navigation }) {
     let result = await ImagePicker.launchImageLibraryAsync({
       mediaTypes: ImagePicker.MediaTypeOptions.All,
       allowsEditing: true,
-      aspect: [4, 4],
+      aspect: [3, 4],
       quality: 1,
     });
 
-    console.log(result);
+    //console.log(result);
 
     if (!result.cancelled) {
       setImage(result);
