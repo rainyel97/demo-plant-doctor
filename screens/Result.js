@@ -41,27 +41,41 @@ function Result({ route, navigation }) {
             으로 판별되었습니다!
           </Text>
         </View>
-        <View style={{ flexDirection: "row" }}>
-          <Pressable
-            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-            onPress={showPestHandler}
-          >
-            <View>
-              <Text style={styles.buttonText}>질병 정보</Text>
-            </View>
-          </Pressable>
-          <Pressable
-            style={({ pressed }) => [styles.button, pressed && styles.pressed]}
-            onPress={showPesticideHandler}
-          >
-            <View>
-              <Text style={styles.buttonText}>농약 정보</Text>
-            </View>
-          </Pressable>
-        </View>
-        <Text style={{ fontSize: 18 }}>
-          버튼을 클릭하시면 상세정보 확인이 가능합니다.
-        </Text>
+        {pest === "정상" ? null : (
+          <View style={{ flexDirection: "row" }}>
+            <Pressable
+              style={({ pressed }) => [
+                styles.button,
+                pressed && styles.pressed,
+              ]}
+              onPress={showPestHandler}
+            >
+              <View>
+                <Text style={styles.buttonText}>질병 정보</Text>
+              </View>
+            </Pressable>
+            <Pressable
+              style={({ pressed }) => [
+                styles.button,
+                pressed && styles.pressed,
+              ]}
+              onPress={showPesticideHandler}
+            >
+              <View>
+                <Text style={styles.buttonText}>농약 정보</Text>
+              </View>
+            </Pressable>
+          </View>
+        )}
+        {pest === "정상" ? (
+          <Text style={{ fontSize: 18 }}>
+            해당 검사내역은 발견된 병충해가 없습니다.
+          </Text>
+        ) : (
+          <Text style={{ fontSize: 18 }}>
+            버튼을 클릭하시면 상세정보 확인이 가능합니다.
+          </Text>
+        )}
       </View>
       <View style={{ alignItems: "center", marginTop: 20 }}>
         <Pressable
