@@ -32,7 +32,11 @@ function SelectImage({ route, navigation }) {
     const match = /\.(\w+)$/.exec(filename ?? "");
     const type = match ? `image/${match[1]}` : `image`;
     const formData = new FormData();
-    formData.append("image", { uri: localUri, name: filename, type });
+    formData.append("image", {
+      uri: localUri,
+      name: filename,
+      type,
+    });
     await axios({
       method: "post",
       url: `http://3.38.14.197:3001/api/users/${userEmail}/post/${plantName}`,
@@ -136,7 +140,7 @@ function SelectImage({ route, navigation }) {
       quality: 1,
     });
 
-    //console.log(result);
+    console.log(result);
 
     if (!result.cancelled) {
       setImage(result);
