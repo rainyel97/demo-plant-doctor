@@ -40,6 +40,9 @@ function Result({ route, navigation }) {
             <Text style={{ color: "red", fontSize: 24 }}>{pest}</Text>
             으로 판별되었습니다!
           </Text>
+          {acc <= 70 ? (
+            <Text>정확도가 낮습니다. 작물이 일치하는지 다시 확인해주세요.</Text>
+          ) : null}
         </View>
         {pest === "정상" ? null : (
           <View style={{ flexDirection: "row" }}>
