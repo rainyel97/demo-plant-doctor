@@ -7,9 +7,10 @@ import {
   TouchableOpacity,
   Alert,
 } from "react-native";
-import { useEffect, useContext, useState } from "react";
+import { useEffect, useContext, useState, useLayoutEffect } from "react";
 import { AuthContext } from "../store/auth-context";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { AntDesign } from "@expo/vector-icons";
 import axios from "axios";
 const Tab = createBottomTabNavigator();
 //네비게이션을 이용해 작물별로 구현
@@ -24,7 +25,7 @@ function PepperHis({ navigation }) {
   async function getResult(userEmail) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
-      .catch((err) => {
+      .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then((res) => {
@@ -41,7 +42,7 @@ function PepperHis({ navigation }) {
       .delete(
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
-      .catch((err) => {
+      .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then(() => {
@@ -128,7 +129,6 @@ function PepperHis({ navigation }) {
                   { text: "아니오", style: "cancel" },
                 ]);
               }}
-              //removeResult.bind(this, item.Search_idx)}
             >
               <Text
                 style={{
@@ -160,7 +160,7 @@ function CabbageHis({ navigation }) {
   async function getResult(userEmail) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
-      .catch((err) => {
+      .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then((res) => {
@@ -176,7 +176,7 @@ function CabbageHis({ navigation }) {
       .delete(
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
-      .catch((err) => {
+      .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then(() => {
@@ -294,7 +294,7 @@ function WelshHis({ navigation }) {
   async function getResult(userEmail) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
-      .catch((err) => {
+      .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then((res) => {
@@ -310,7 +310,7 @@ function WelshHis({ navigation }) {
       .delete(
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
-      .catch((err) => {
+      .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then(() => {
@@ -428,7 +428,7 @@ function BeanHis({ navigation }) {
   async function getResult(userEmail) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
-      .catch((err) => {
+      .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then((res) => {
@@ -444,7 +444,7 @@ function BeanHis({ navigation }) {
       .delete(
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
-      .catch((err) => {
+      .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then(() => {
@@ -562,7 +562,7 @@ function RadishHis({ navigation }) {
   async function getResult(userEmail) {
     await axios
       .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
-      .catch((err) => {
+      .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then((res) => {
@@ -578,7 +578,7 @@ function RadishHis({ navigation }) {
       .delete(
         `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
       )
-      .catch((err) => {
+      .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
       .then(() => {
@@ -686,7 +686,66 @@ function RadishHis({ navigation }) {
   );
 }
 
-function History() {
+function History({ navigation }) {
+  const authCtx = useContext(AuthContext);
+  const userEmail = authCtx.email;
+  const [result, setResult] = useState([]);
+  useEffect(() => {
+    getResult(userEmail);
+  }, []);
+  async function getResult(userEmail) {
+    await axios
+      .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
+      .catch(() => {
+        Alert.alert("서버와의 통신에 실패했습니다.");
+      })
+      .then((res) => {
+        setResult(res.data);
+      });
+    console.log(result);
+    console.log(result.length);
+  }
+  async function deleteAllHandler(userEmail) {
+    await axios
+      .delete(`http://3.38.14.197:3001/api/users/${userEmail}/deleteAll`)
+      .catch(() => {
+        Alert.alert("서버와의 통신에 실패했습니다.");
+      })
+      .then(() => {
+        Alert.alert("내역이 전부 삭제되었습니다");
+      });
+    navigation.navigate("Home");
+  }
+
+  useLayoutEffect(() => {
+    navigation.setOptions({
+      headerRight: () => {
+        return (
+          <AntDesign
+            name="delete"
+            size={24}
+            color="black"
+            onPress={() => {
+              if (result.length === 0)
+                Alert.alert("삭제할 내역이 존재하지 않습니다.");
+              else
+                Alert.alert(
+                  "정말 내역 전체를 삭제하시겠습니까?",
+                  "이 기능을 실행하면 되돌릴 수 없습니다.",
+                  [
+                    {
+                      text: "예",
+                      onPress: deleteAllHandler.bind(this, userEmail),
+                    },
+                    { text: "아니오", style: "cancel" },
+                  ]
+                );
+            }}
+          />
+        );
+      },
+    });
+  }, [navigation, deleteAllHandler]);
   return (
     <Tab.Navigator
       initialRouteName="All"
@@ -697,21 +756,6 @@ function History() {
         tabBarActiveBackgroundColor: "lightgreen",
       }}
     >
-      {/* <Tab.Screen
-        name="All"
-        component={AllHis}
-        options={{
-          headerShown: false,
-          title: "모두보기",
-          tabBarIcon: () => (
-            <Image
-              source={require("../assets/icon_all.png")}
-              resizeMode="cover"
-              style={{ transform: [{ scale: 0.06 }] }}
-            />
-          ),
-        }}
-      /> */}
       <Tab.Screen
         name="Pepper"
         component={PepperHis}
