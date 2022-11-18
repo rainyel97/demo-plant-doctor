@@ -23,7 +23,7 @@ function SelectImage({ route, navigation }) {
   const authCtx = useContext(AuthContext);
   const userEmail = authCtx.email; // 사용자에 따라 다른 내역 저장을 위함.
   async function getResult() {
-    setIsExamining(true);
+    //setIsExamining(true);
     let pest;
     let acc;
     let arr = [];
@@ -37,6 +37,7 @@ function SelectImage({ route, navigation }) {
       name: filename,
       type,
     });
+    setIsExamining(true); //로딩화면출력
     await axios({
       method: "post",
       url: `http://3.38.14.197:3001/api/users/${userEmail}/post/${plantName}`,
