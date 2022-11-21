@@ -61,6 +61,7 @@ function SelectImage({ route, navigation }) {
     //console.log(type);
     if (pest === "검사불가") {
       setIsExamining(false);
+      setImage(null);
       Alert.alert(
         "올바르지 않은 이미지 입니다.",
         "이미지를 다시 확인해주세요."
