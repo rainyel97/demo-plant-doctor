@@ -24,7 +24,9 @@ function PepperHis({ navigation }) {
   }, []);
   async function getResult(userEmail) {
     await axios
-      .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
+      .get(
+        `http://3.38.14.197:3001/api/users/${userEmail}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`
+      )
       .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
@@ -40,7 +42,7 @@ function PepperHis({ navigation }) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
     await axios
       .delete(
-        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`
       )
       .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
@@ -87,7 +89,7 @@ function PepperHis({ navigation }) {
                   pest: item.Pest,
                   acc: item.Percentage,
                   image: {
-                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`,
                   },
                 })
               }
@@ -95,7 +97,7 @@ function PepperHis({ navigation }) {
             >
               <Image
                 source={{
-                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`,
                 }}
                 style={{
                   marginHorizontal: 10,
@@ -159,7 +161,9 @@ function CabbageHis({ navigation }) {
   }, []);
   async function getResult(userEmail) {
     await axios
-      .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
+      .get(
+        `http://3.38.14.197:3001/api/users/${userEmail}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`
+      )
       .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
@@ -174,7 +178,7 @@ function CabbageHis({ navigation }) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
     await axios
       .delete(
-        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`
       )
       .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
@@ -221,7 +225,7 @@ function CabbageHis({ navigation }) {
                   pest: item.Pest,
                   acc: item.Percentage,
                   image: {
-                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`,
                   },
                 })
               }
@@ -229,7 +233,7 @@ function CabbageHis({ navigation }) {
             >
               <Image
                 source={{
-                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`,
                 }}
                 style={{
                   marginHorizontal: 10,
@@ -293,7 +297,9 @@ function WelshHis({ navigation }) {
   }, []);
   async function getResult(userEmail) {
     await axios
-      .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
+      .get(
+        `http://3.38.14.197:3001/api/users/${userEmail}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`
+      )
       .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
@@ -308,7 +314,7 @@ function WelshHis({ navigation }) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
     await axios
       .delete(
-        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`
       )
       .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
@@ -355,7 +361,7 @@ function WelshHis({ navigation }) {
                   pest: item.Pest,
                   acc: item.Percentage,
                   image: {
-                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`,
                   },
                 })
               }
@@ -363,7 +369,7 @@ function WelshHis({ navigation }) {
             >
               <Image
                 source={{
-                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`,
                 }}
                 style={{
                   marginHorizontal: 10,
@@ -427,7 +433,9 @@ function BeanHis({ navigation }) {
   }, []);
   async function getResult(userEmail) {
     await axios
-      .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
+      .get(
+        `http://3.38.14.197:3001/api/users/${userEmail}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`
+      )
       .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
@@ -442,7 +450,7 @@ function BeanHis({ navigation }) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
     await axios
       .delete(
-        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`
       )
       .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
@@ -489,7 +497,7 @@ function BeanHis({ navigation }) {
                   pest: item.Pest,
                   acc: item.Percentage,
                   image: {
-                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`,
                   },
                 })
               }
@@ -497,7 +505,7 @@ function BeanHis({ navigation }) {
             >
               <Image
                 source={{
-                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`,
                 }}
                 style={{
                   marginHorizontal: 10,
@@ -561,7 +569,9 @@ function RadishHis({ navigation }) {
   }, []);
   async function getResult(userEmail) {
     await axios
-      .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
+      .get(
+        `http://3.38.14.197:3001/api/users/${userEmail}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`
+      )
       .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
@@ -576,7 +586,7 @@ function RadishHis({ navigation }) {
     //서버로 삭제할 내역을 보냄(삭제할 내역의 인덱스를 변수로받아야함)
     await axios
       .delete(
-        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}`
+        `http://3.38.14.197:3001/api/users/${userEmail}/delete/${toRemoveIdx}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`
       )
       .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
@@ -623,7 +633,7 @@ function RadishHis({ navigation }) {
                   pest: item.Pest,
                   acc: item.Percentage,
                   image: {
-                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                    uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`,
                   },
                 })
               }
@@ -631,7 +641,7 @@ function RadishHis({ navigation }) {
             >
               <Image
                 source={{
-                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}`,
+                  uri: `http://3.38.14.197:3001/api/images/${item.Plant_img}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`,
                 }}
                 style={{
                   marginHorizontal: 10,
@@ -695,7 +705,9 @@ function History({ navigation }) {
   }, []);
   async function getResult(userEmail) {
     await axios
-      .get(`http://3.38.14.197:3001/api/users/${userEmail}`)
+      .get(
+        `http://3.38.14.197:3001/api/users/${userEmail}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`
+      )
       .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })
@@ -707,7 +719,9 @@ function History({ navigation }) {
   }
   async function deleteAllHandler(userEmail) {
     await axios
-      .delete(`http://3.38.14.197:3001/api/users/${userEmail}/deleteAll`)
+      .delete(
+        `http://3.38.14.197:3001/api/users/${userEmail}/deleteAll/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`
+      )
       .catch(() => {
         Alert.alert("서버와의 통신에 실패했습니다.");
       })

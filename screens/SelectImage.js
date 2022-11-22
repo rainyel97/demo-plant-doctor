@@ -40,7 +40,7 @@ function SelectImage({ route, navigation }) {
     setIsExamining(true); //로딩화면출력
     await axios({
       method: "post",
-      url: `http://3.38.14.197:3001/api/users/${userEmail}/post/${plantName}`,
+      url: `http://3.38.14.197:3001/api/users/${userEmail}/post/${plantName}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`,
       headers: {
         "content-type": "multipart/form-data",
       },
@@ -76,7 +76,7 @@ function SelectImage({ route, navigation }) {
       setIsExamining(false);
       navigation.navigate("Result", {
         image: {
-          uri: `http://3.38.14.197:3001/api/images/${arr[0]}`,
+          uri: `http://3.38.14.197:3001/api/images/${arr[0]}/3F1MYFZ-HWKMSBR-QQ5KZPB-F3ZQ92X`,
         },
         acc: acc,
         pest: pest,
