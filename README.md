@@ -10,6 +10,6 @@ ___관련 ppt 자료 이미지___
 ![20230111013904](https://user-images.githubusercontent.com/85095908/211610651-f4d9ebb2-0d9b-441b-b3f2-3e6d0689c7d9.png)
 ![20230111013926](https://user-images.githubusercontent.com/85095908/211610658-3da0fc7b-9612-40e6-a328-acce5add7148.png)
 ![20230111013948](https://user-images.githubusercontent.com/85095908/211610665-d2691a0c-deb0-4d6f-81da-737df24d984c.png)
-![20230111014016](https://user-images.githubusercontent.com/85095908/211610667-f43d06dc-a5ad-449b-a1d8-be2bd5ad4681.png)
+![20230111155706](https://user-images.githubusercontent.com/85095908/211738584-c8dc9148-6f48-45ec-8c92-9ee2f87a95f4.png)
 ![20230111014036](https://user-images.githubusercontent.com/85095908/211610673-d02fa511-f0db-4a3f-a5e3-2a2fee745abe.png)
 ![20230111014106](https://user-images.githubusercontent.com/85095908/211610677-71e5ce07-ee5b-40b6-9b7b-4b16b21618ff.png)
